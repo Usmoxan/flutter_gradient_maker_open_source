@@ -657,7 +657,7 @@ class _HomePageState extends State<HomePage> {
         builder: (context) {
           return AlertDialog(
             content: SizedBox(
-              height: 500,
+              height: MediaQuery.of(context).size.width > 500 ? 600 : 700,
               width: 1000,
               child: Center(
                 child: Column(

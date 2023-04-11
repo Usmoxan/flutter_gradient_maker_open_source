@@ -295,7 +295,10 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                 ),
                               ),
-                        const SizedBox(height: 40),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width > 500
+                                ? 40
+                                : 10),
                         const Padding(
                           padding: EdgeInsets.only(top: 10, bottom: 10),
                           child: Text(
@@ -304,7 +307,11 @@ class _HomePageState extends State<HomePage> {
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        Visibility(
+                            visible: MediaQuery.of(context).size.width > 500
+                                ? true
+                                : false,
+                            child: const SizedBox(height: 10)),
                         Row(
                           children: [
                             OutlinedButton(
@@ -454,7 +461,6 @@ class _HomePageState extends State<HomePage> {
                                       setState(() {
                                         _choice = 7;
                                         funcChoice(_choice, selectedColor);
-                                        print(_choice);
                                       });
                                     },
                                     bgColor: gridItem7,
@@ -481,7 +487,6 @@ class _HomePageState extends State<HomePage> {
                                       setState(() {
                                         _choice = 9;
                                         funcChoice(_choice, selectedColor);
-                                        print(_choice);
                                       });
                                     },
                                     icon: Bootstrap.arrow_down_right,
@@ -494,7 +499,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                         const SizedBox(height: 10),
                         Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                          padding: MediaQuery.of(context).size.width > 500
+                              ? const EdgeInsets.only(top: 10, bottom: 10)
+                              : const EdgeInsets.all(0),
                           child: Row(
                             children: const [
                               Text(
@@ -539,7 +546,14 @@ class _HomePageState extends State<HomePage> {
                               ),
                               const SizedBox(width: 10),
                               OutlinedButton(
-                                  onPressed: _changeColor,
+                                  onPressed: () {
+                                    setState(() {
+                                      _color1 =
+                                          Color(Random().nextInt(0xffffffff));
+                                      _color2 =
+                                          Color(Random().nextInt(0xffffffff));
+                                    });
+                                  },
                                   child: const Text(
                                     "Random",
                                     style: TextStyle(color: Colors.black),

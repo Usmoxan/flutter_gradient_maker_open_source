@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../widgets/button_selector.dart';
+import 'package:cherry_toast/cherry_toast.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,15 +16,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _formKey = GlobalKey<FormState>();
   //Alignment
   Alignment begin = Alignment.bottomRight;
   Alignment end = Alignment.topLeft;
 
   //colors
   final Color selectedColor = const Color(0xFFDEEBFF);
-  Color _color1 = Colors.red;
-  Color _color2 = Colors.green;
+  Color _color1 = Color(Random().nextInt(0xffffffff));
+  Color _color2 = Color(Random().nextInt(0xffffffff));
   int _choice = 1;
+
   //Colors Grids
   Color gridItem1 = const Color(0xFFDEEBFF);
   Color gridItem2 = Colors.white;
@@ -33,6 +37,10 @@ class _HomePageState extends State<HomePage> {
   Color gridItem7 = Colors.white;
   Color gridItem8 = Colors.white;
   Color gridItem9 = Colors.white;
+
+  //TextEditingController
+  final firstColorEditingController = TextEditingController(text: '0');
+  final secondColorEditingController = TextEditingController(text: '100');
 
   void funcChoice(int choice, Color selectedColor) {
     switch (choice) {
@@ -211,6 +219,11 @@ class _HomePageState extends State<HomePage> {
   //bools
   bool isLinearStyle = true;
 
+  //doubles
+
+  double first = 0;
+  double second = 100;
+
   @override
   void initState() {
     Timer.periodic(
@@ -230,331 +243,403 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Row(
-        children: [
-          ///
-          Container(
-            padding: const EdgeInsets.all(50),
-            width: 350,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Spacer(),
-                Text(
-                  "Flutter\nGradient\nGenerator Pro".toUpperCase(),
-                  style: const TextStyle(
-                      fontSize: 25, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 40),
-                const Padding(
-                  padding: EdgeInsets.only(top: 10, bottom: 10),
-                  child: Text(
-                    "Style",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    OutlinedButton(
-                        style: ButtonStyle(
-                            backgroundColor: isLinearStyle
-                                ? MaterialStatePropertyAll(_selectedColor)
-                                : const MaterialStatePropertyAll(Colors.white)),
-                        onPressed: () {
-                          setState(() {
-                            isLinearStyle = true;
-                          });
-                        },
-                        child: const Text(
-                          "Linear",
-                          style: TextStyle(color: Colors.black),
-                        )),
-                    const SizedBox(width: 10),
-                    OutlinedButton(
-                        style: ButtonStyle(
-                            backgroundColor: isLinearStyle
-                                ? const MaterialStatePropertyAll(Colors.white)
-                                : MaterialStatePropertyAll(_selectedColor)),
-                        onPressed: () {
-                          setState(() {
-                            isLinearStyle = false;
-                          });
-                        },
-                        child: const Text(
-                          "Radial",
-                          style: TextStyle(color: Colors.black),
-                        )),
-                  ],
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 10, bottom: 10),
-                  child: Text(
-                    "Direction",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Column(
-                  children: [
-                    //TOP
-                    Row(
+    return SafeArea(
+      child: Scaffold(
+        body: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ///
+            Form(
+              key: _formKey,
+              child: SizedBox(
+                width: 350,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.all(
+                        MediaQuery.of(context).size.width > 500 ? 50 : 8),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: OutlinedButtonSelection(
-                            icon: Bootstrap.arrow_up_left,
-                            onPressed: () {
-                              setState(() {
-                                _choice = 1;
-                                funcChoice(_choice, selectedColor);
-                              });
-                            },
-                            bgColor: gridItem1,
-                          ),
-                        ),
-                        const SizedBox(width: 15),
-                        Expanded(
-                          child: OutlinedButtonSelection(
-                            onPressed: () {
-                              setState(() {
-                                _choice = 2;
-                                funcChoice(_choice, selectedColor);
-                              });
-                            },
-                            icon: Bootstrap.arrow_up,
-                            bgColor: gridItem2,
-                          ),
-                        ),
-                        const SizedBox(width: 15),
-                        Expanded(
-                          child: OutlinedButtonSelection(
-                            onPressed: () {
-                              setState(() {
-                                _choice = 3;
-                                funcChoice(_choice, selectedColor);
-                              });
-                            },
-                            icon: Bootstrap.arrow_up_right,
-                            bgColor: gridItem3,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    //CENTER
-                    Row(
-                      children: [
-                        Expanded(
-                          child: OutlinedButtonSelection(
-                            icon: Bootstrap.arrow_left,
-                            onPressed: () {
-                              setState(() {
-                                _choice = 4;
-                                funcChoice(_choice, selectedColor);
-                              });
-                            },
-                            bgColor: gridItem4,
-                          ),
-                        ),
-                        const SizedBox(width: 15),
-                        Expanded(
-                          child: isLinearStyle
-                              ? Container()
-                              : OutlinedButtonSelection(
-                                  onPressed: () {
-                                    setState(() {
-                                      _choice = 5;
-                                      funcChoice(_choice, selectedColor);
-                                    });
-                                  },
-                                  icon: Bootstrap.circle10,
-                                  bgColor: gridItem5,
+                        // const Spacer(),
+                        MediaQuery.of(context).size.width > 500
+                            ? Text(
+                                "Flutter\nGradient\nGenerator Pro"
+                                    .toUpperCase(),
+                                style: const TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold),
+                              )
+                            : Container(
+                                height: 200,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  border:
+                                      Border.all(color: Colors.grey.shade300),
+                                  gradient: isLinearStyle
+                                      ? LinearGradient(
+                                          colors: [
+                                            _color1,
+                                            _color2,
+                                          ],
+                                          begin: begin,
+                                          end: end,
+                                        )
+                                      : RadialGradient(
+                                          colors: [
+                                            _color1,
+                                            _color2,
+                                          ],
+                                          center: begin,
+                                          radius: 0.8,
+                                        ),
                                 ),
-                        ),
-                        const SizedBox(width: 15),
-                        Expanded(
-                          child: OutlinedButtonSelection(
-                            onPressed: () {
-                              setState(() {
-                                _choice = 6;
-                                funcChoice(_choice, selectedColor);
-                                print(_choice);
-                              });
-                            },
-                            icon: Bootstrap.arrow_right,
-                            bgColor: gridItem6,
+                              ),
+                        const SizedBox(height: 40),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: Text(
+                            "Style",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    //BOTTOM
-                    Row(
-                      children: [
-                        Expanded(
-                          child: OutlinedButtonSelection(
-                            icon: Bootstrap.arrow_down_left,
-                            onPressed: () {
-                              setState(() {
-                                _choice = 7;
-                                funcChoice(_choice, selectedColor);
-                                print(_choice);
-                              });
-                            },
-                            bgColor: gridItem7,
+                        const SizedBox(height: 10),
+                        Row(
+                          children: [
+                            OutlinedButton(
+                                style: ButtonStyle(
+                                    backgroundColor: isLinearStyle
+                                        ? MaterialStatePropertyAll(
+                                            _selectedColor)
+                                        : const MaterialStatePropertyAll(
+                                            Colors.white)),
+                                onPressed: () {
+                                  setState(() {
+                                    isLinearStyle = true;
+                                  });
+                                },
+                                child: const Text(
+                                  "Linear",
+                                  style: TextStyle(color: Colors.black),
+                                )),
+                            const SizedBox(width: 10),
+                            OutlinedButton(
+                                style: ButtonStyle(
+                                    backgroundColor: isLinearStyle
+                                        ? const MaterialStatePropertyAll(
+                                            Colors.white)
+                                        : MaterialStatePropertyAll(
+                                            _selectedColor)),
+                                onPressed: () {
+                                  setState(() {
+                                    isLinearStyle = false;
+                                  });
+                                },
+                                child: const Text(
+                                  "Radial",
+                                  style: TextStyle(color: Colors.black),
+                                )),
+                          ],
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: Text(
+                            "Direction",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
-                        const SizedBox(width: 15),
-                        Expanded(
-                          child: OutlinedButtonSelection(
-                            onPressed: () {
-                              setState(() {
-                                _choice = 8;
-                                funcChoice(_choice, selectedColor);
-                                print(_choice);
-                              });
-                            },
-                            icon: Bootstrap.arrow_down,
-                            bgColor: gridItem8,
+                        Column(
+                          children: [
+                            //TOP
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: OutlinedButtonSelection(
+                                    icon: Bootstrap.arrow_up_left,
+                                    onPressed: () {
+                                      setState(() {
+                                        _choice = 1;
+                                        funcChoice(_choice, selectedColor);
+                                      });
+                                    },
+                                    bgColor: gridItem1,
+                                  ),
+                                ),
+                                const SizedBox(width: 15),
+                                Expanded(
+                                  child: OutlinedButtonSelection(
+                                    onPressed: () {
+                                      setState(() {
+                                        _choice = 2;
+                                        funcChoice(_choice, selectedColor);
+                                      });
+                                    },
+                                    icon: Bootstrap.arrow_up,
+                                    bgColor: gridItem2,
+                                  ),
+                                ),
+                                const SizedBox(width: 15),
+                                Expanded(
+                                  child: OutlinedButtonSelection(
+                                    onPressed: () {
+                                      setState(() {
+                                        _choice = 3;
+                                        funcChoice(_choice, selectedColor);
+                                      });
+                                    },
+                                    icon: Bootstrap.arrow_up_right,
+                                    bgColor: gridItem3,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            //CENTER
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: OutlinedButtonSelection(
+                                    icon: Bootstrap.arrow_left,
+                                    onPressed: () {
+                                      setState(() {
+                                        _choice = 4;
+                                        funcChoice(_choice, selectedColor);
+                                      });
+                                    },
+                                    bgColor: gridItem4,
+                                  ),
+                                ),
+                                const SizedBox(width: 15),
+                                Expanded(
+                                  child: isLinearStyle
+                                      ? Container()
+                                      : OutlinedButtonSelection(
+                                          onPressed: () {
+                                            setState(() {
+                                              _choice = 5;
+                                              funcChoice(
+                                                  _choice, selectedColor);
+                                            });
+                                          },
+                                          icon: Bootstrap.circle10,
+                                          bgColor: gridItem5,
+                                        ),
+                                ),
+                                const SizedBox(width: 15),
+                                Expanded(
+                                  child: OutlinedButtonSelection(
+                                    onPressed: () {
+                                      setState(() {
+                                        _choice = 6;
+                                        funcChoice(_choice, selectedColor);
+                                        print(_choice);
+                                      });
+                                    },
+                                    icon: Bootstrap.arrow_right,
+                                    bgColor: gridItem6,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            //BOTTOM
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: OutlinedButtonSelection(
+                                    icon: Bootstrap.arrow_down_left,
+                                    onPressed: () {
+                                      setState(() {
+                                        _choice = 7;
+                                        funcChoice(_choice, selectedColor);
+                                        print(_choice);
+                                      });
+                                    },
+                                    bgColor: gridItem7,
+                                  ),
+                                ),
+                                const SizedBox(width: 15),
+                                Expanded(
+                                  child: OutlinedButtonSelection(
+                                    onPressed: () {
+                                      setState(() {
+                                        _choice = 8;
+                                        funcChoice(_choice, selectedColor);
+                                        print(_choice);
+                                      });
+                                    },
+                                    icon: Bootstrap.arrow_down,
+                                    bgColor: gridItem8,
+                                  ),
+                                ),
+                                const SizedBox(width: 15),
+                                Expanded(
+                                  child: OutlinedButtonSelection(
+                                    onPressed: () {
+                                      setState(() {
+                                        _choice = 9;
+                                        funcChoice(_choice, selectedColor);
+                                        print(_choice);
+                                      });
+                                    },
+                                    icon: Bootstrap.arrow_down_right,
+                                    bgColor: gridItem9,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                          child: Row(
+                            children: const [
+                              Text(
+                                "Color & Stops",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                              Spacer(),
+                            ],
                           ),
                         ),
-                        const SizedBox(width: 15),
-                        Expanded(
-                          child: OutlinedButtonSelection(
-                            onPressed: () {
-                              setState(() {
-                                _choice = 9;
-                                funcChoice(_choice, selectedColor);
-                                print(_choice);
-                              });
-                            },
-                            icon: Bootstrap.arrow_down_right,
-                            bgColor: gridItem9,
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: _showDialog1,
+                                  child: Container(
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.grey.shade300),
+                                        color: _color1,
+                                        borderRadius: BorderRadius.circular(5)),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: _showDialog2,
+                                  child: Container(
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.grey.shade300),
+                                        color: _color2,
+                                        borderRadius: BorderRadius.circular(5)),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              OutlinedButton(
+                                  onPressed: _changeColor,
+                                  child: const Text(
+                                    "Random",
+                                    style: TextStyle(color: Colors.black),
+                                  ))
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 10),
-                  child: Row(
-                    children: const [
-                      Text(
-                        "Color & Stops",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      Spacer(),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 10),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: _showDialog1,
-                          child: Container(
-                            height: 40,
-                            decoration: BoxDecoration(
-                                color: _color1,
-                                borderRadius: BorderRadius.circular(5)),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: _showDialog2,
-                          child: Container(
-                            height: 40,
-                            decoration: BoxDecoration(
-                                color: _color2,
-                                borderRadius: BorderRadius.circular(5)),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      OutlinedButton(
-                          onPressed: _changeColor,
-                          child: const Text(
-                            "Random",
-                            style: TextStyle(color: Colors.black),
-                          ))
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: 50,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              if (isLinearStyle) {
-                                Clipboard.setData(ClipboardData(text: """
-  LinearGradient(
-              colors: [
-                          $_color1,
-                          $_color2,
-                        ],
-                        begin: $begin,
-                        end: $end,
-              )"""));
-                              } else {
-                                Clipboard.setData(ClipboardData(text: """
- RadialGradient(colors: [
-                        $_color1,
-                        $_color2,
-                      ], stops: const [
-                        0,
-                        1
-                      ], center: $begin, radius: 0.8),"""));
-                              }
-                            },
-                            child: const Text("Copy Gradient Code")),
-                      ),
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                const Center(
-                  child: Text("Created by Hayrulloh"),
-                )
-              ],
-            ),
-          ),
 
-          ///
-          ///
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: isLinearStyle
-                    ? LinearGradient(
-                        colors: [
-                          _color1,
-                          _color2,
-                        ],
-                        begin: begin,
-                        end: end,
-                      )
-                    : RadialGradient(colors: [
-                        _color1,
-                        _color2,
-                      ], stops: const [
-                        0,
-                        1
-                      ], center: begin, radius: 0.8),
+                        const SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: SizedBox(
+                                height: 50,
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      if (isLinearStyle) {
+                                        Clipboard.setData(
+                                            ClipboardData(text: """
+                            LinearGradient(
+                      colors: [
+                                  $_color1,
+                                  $_color2,
+                                ],
+                                begin: $begin,
+                                end: $end,
+                      )"""));
+                                      } else {
+                                        Clipboard.setData(
+                                            ClipboardData(text: """
+                             RadialGradient(colors: [
+                                $_color1,
+                                $_color2,
+                              ], stops: const [
+                                0,
+                                1
+                              ], center: $begin, radius: 0.8),"""));
+                                      }
+
+                                      CherryToast(
+                                              icon: Icons.copy,
+                                              themeColor: Colors.pink,
+                                              title: const Text(""),
+                                              displayTitle: false,
+                                              description: const Text(
+                                                  "Gradient Code Copied"),
+                                              toastPosition: Position.bottom,
+                                              animationDuration: const Duration(
+                                                  milliseconds: 1000),
+                                              autoDismiss: true)
+                                          .show(context);
+                                    },
+                                    child: const Text("Copy Gradient Code")),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text("Created by Hayrulloh"),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ),
-          ),
-        ],
+
+            ///
+            ///
+            ///
+            if (MediaQuery.of(context).size.width > 500)
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: isLinearStyle
+                        ? LinearGradient(
+                            colors: [
+                              _color1,
+                              _color2,
+                            ],
+                            begin: begin,
+                            end: end,
+                          )
+                        : RadialGradient(
+                            colors: [
+                              _color1,
+                              _color2,
+                            ],
+                            center: begin,
+                            radius: 0.8,
+                          ),
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

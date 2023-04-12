@@ -8,6 +8,7 @@ import 'package:cherry_toast/cherry_toast.dart';
 
 import '../widgets/color_picker_button.dart';
 import '../widgets/color_picker_dialog.dart';
+import '../widgets/style_selector_row.dart';
 import 'direction_grid.dart';
 import 'gradient_container.dart';
 
@@ -23,6 +24,9 @@ class _HomePageState extends State<HomePage> {
   //Alignment
   Alignment begin = Alignment.bottomRight;
   Alignment end = Alignment.topLeft;
+
+  TextStyle widgetsTitle =
+      const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
 
   //colors
   final Color selectedColor = const Color(0xFFDEEBFF);
@@ -322,12 +326,11 @@ class _HomePageState extends State<HomePage> {
                             height: MediaQuery.of(context).size.width > 500
                                 ? 40
                                 : 10),
-                        const Padding(
-                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, bottom: 10),
                           child: Text(
                             "Style",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                            style: widgetsTitle,
                           ),
                         ),
                         Visibility(
@@ -335,49 +338,25 @@ class _HomePageState extends State<HomePage> {
                                 ? true
                                 : false,
                             child: const SizedBox(height: 10)),
-                        Row(
-                          children: [
-                            OutlinedButton(
-                                style: ButtonStyle(
-                                    backgroundColor: isLinearStyle
-                                        ? MaterialStatePropertyAll(
-                                            _selectedColor)
-                                        : const MaterialStatePropertyAll(
-                                            Colors.white)),
-                                onPressed: () {
-                                  setState(() {
-                                    isLinearStyle = true;
-                                  });
-                                },
-                                child: const Text(
-                                  "Linear",
-                                  style: TextStyle(color: Colors.black),
-                                )),
-                            const SizedBox(width: 10),
-                            OutlinedButton(
-                                style: ButtonStyle(
-                                    backgroundColor: isLinearStyle
-                                        ? const MaterialStatePropertyAll(
-                                            Colors.white)
-                                        : MaterialStatePropertyAll(
-                                            _selectedColor)),
-                                onPressed: () {
-                                  setState(() {
-                                    isLinearStyle = false;
-                                  });
-                                },
-                                child: const Text(
-                                  "Radial",
-                                  style: TextStyle(color: Colors.black),
-                                )),
-                          ],
+                        StyleSelectorRow(
+                          isLinearStyle: isLinearStyle,
+                          selectedColor: _selectedColor,
+                          onLinearPressed: () {
+                            setState(() {
+                              isLinearStyle = true;
+                            });
+                          },
+                          onRadialPressed: () {
+                            setState(() {
+                              isLinearStyle = false;
+                            });
+                          },
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, bottom: 10),
                           child: Text(
                             "Direction",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                            style: widgetsTitle,
                           ),
                         ),
                         ToolsPanel(
@@ -400,91 +379,79 @@ class _HomePageState extends State<HomePage> {
                               ? const EdgeInsets.only(top: 10, bottom: 10)
                               : const EdgeInsets.all(0),
                           child: Row(
-                            children: const [
+                            children: [
                               Text(
                                 "Color & Stops",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
+                                style: widgetsTitle,
                               ),
-                              Spacer(),
+                              const Spacer(),
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: GestureDetector(
-                                  onTap: _showDialog1,
-                                  child: ColorPickerButton(
-                                    color: _color1,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              Expanded(
-                                child: GestureDetector(
-                                  onTap: _showDialog2,
-                                  child: ColorPickerButton(
-                                    color: _color2,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              OutlinedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      _color1 =
-                                          Color(Random().nextInt(0xffffffff));
-                                      _color2 =
-                                          Color(Random().nextInt(0xffffffff));
-                                    });
-                                  },
-                                  child: const Text(
-                                    "Random",
-                                    style: TextStyle(color: Colors.black),
-                                  ))
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 10),
+                         const SizedBox(height: 10),
                         Row(
                           children: [
                             Expanded(
-                              child: SizedBox(
-                                height: 50,
-                                child: ElevatedButton(
-                                    onPressed: () {
-                                      Clipboard.setData(ClipboardData(
-                                          text: isLinearStyle
-                                              ? linearCode
-                                              : radialCode));
-
-                                      CherryToast(
-                                              icon: Icons.copy,
-                                              themeColor: Colors.pink,
-                                              title: const Text(""),
-                                              displayTitle: false,
-                                              description:
-                                                  const Text(copiedText),
-                                              toastPosition: Position.bottom,
-                                              animationDuration: const Duration(
-                                                  milliseconds: 1000),
-                                              autoDismiss: true)
-                                          .show(context);
-                                    },
-                                    child: const Text(copyText)),
+                              child: GestureDetector(
+                                onTap: _showDialog1,
+                                child: ColorPickerButton(
+                                  color: _color1,
+                                ),
                               ),
                             ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: _showDialog2,
+                                child: ColorPickerButton(
+                                  color: _color2,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            OutlinedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _color1 =
+                                        Color(Random().nextInt(0xffffffff));
+                                    _color2 =
+                                        Color(Random().nextInt(0xffffffff));
+                                  });
+                                },
+                                child: const Text(
+                                  "Random",
+                                  style: TextStyle(color: Colors.black),
+                                ))
                           ],
                         ),
+                        const SizedBox(height: 10),
+                        SizedBox(
+                          height: 50,
+                          width: double.infinity,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                Clipboard.setData(ClipboardData(
+                                    text: isLinearStyle
+                                        ? linearCode
+                                        : radialCode));
 
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Center(
-                            child: Text(creatorName),
-                          ),
+                                CherryToast(
+                                        icon: Icons.copy,
+                                        themeColor: Colors.pink,
+                                        title: const Text(""),
+                                        displayTitle: false,
+                                        description: const Text(copiedText),
+                                        toastPosition: Position.bottom,
+                                        animationDuration:
+                                            const Duration(milliseconds: 1000),
+                                        autoDismiss: true)
+                                    .show(context);
+                              },
+                              child: const Text(copyText)),
+                        ),
+                        const SizedBox(height: 10),
+                        const Center(
+                          child: Text(creatorName),
                         )
                       ],
                     ),

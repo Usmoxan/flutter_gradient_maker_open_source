@@ -3,11 +3,12 @@ import 'dart:math';
 import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
+import 'package:flutter_gradient_maker/widgets/strings.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../widgets/button_selector.dart';
 import 'package:cherry_toast/cherry_toast.dart';
 
+import '../widgets/color_picker_button.dart';
 import '../widgets/color_picker_dialog.dart';
 import 'gradient_container.dart';
 
@@ -541,13 +542,8 @@ class _HomePageState extends State<HomePage> {
                               Expanded(
                                 child: GestureDetector(
                                   onTap: _showDialog1,
-                                  child: Container(
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.grey.shade300),
-                                        color: _color1,
-                                        borderRadius: BorderRadius.circular(5)),
+                                  child: ColorPickerButton(
+                                    color: _color1,
                                   ),
                                 ),
                               ),
@@ -555,13 +551,8 @@ class _HomePageState extends State<HomePage> {
                               Expanded(
                                 child: GestureDetector(
                                   onTap: _showDialog2,
-                                  child: Container(
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.grey.shade300),
-                                        color: _color2,
-                                        borderRadius: BorderRadius.circular(5)),
+                                  child: ColorPickerButton(
+                                    color: _color2,
                                   ),
                                 ),
                               ),
@@ -591,28 +582,25 @@ class _HomePageState extends State<HomePage> {
                                 height: 50,
                                 child: ElevatedButton(
                                     onPressed: () {
-                                      if (isLinearStyle) {
-                                        Clipboard.setData(
-                                            ClipboardData(text: linearCode));
-                                      } else {
-                                        Clipboard.setData(
-                                            ClipboardData(text: radialCode));
-                                      }
+                                      Clipboard.setData(ClipboardData(
+                                          text: isLinearStyle
+                                              ? linearCode
+                                              : radialCode));
 
                                       CherryToast(
                                               icon: Icons.copy,
                                               themeColor: Colors.pink,
                                               title: const Text(""),
                                               displayTitle: false,
-                                              description: const Text(
-                                                  "Gradient Code Copied"),
+                                              description:
+                                                  const Text(copiedText),
                                               toastPosition: Position.bottom,
                                               animationDuration: const Duration(
                                                   milliseconds: 1000),
                                               autoDismiss: true)
                                           .show(context);
                                     },
-                                    child: const Text("Copy Gradient Code")),
+                                    child: const Text(copyText)),
                               ),
                             ),
                           ],
@@ -621,7 +609,7 @@ class _HomePageState extends State<HomePage> {
                         const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Center(
-                            child: Text("Created by Hayrulloh"),
+                            child: Text(creatorName),
                           ),
                         )
                       ],
@@ -644,55 +632,20 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _changeColor() {
-    setState(() {
-      _color1 = Color(Random().nextInt(0xffffffff));
-      _color2 = Color(Random().nextInt(0xffffffff));
-    });
-  }
-
   _showDialog1() {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: SizedBox(
-              height: MediaQuery.of(context).size.width > 500 ? 600 : 700,
-              width: 1000,
-              child: Center(
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        icon: const Icon(IonIcons.close),
-                      ),
-                    ),
-                    SingleChildScrollView(
-                      child: ValueListenableBuilder<Color>(
-                        valueListenable: _colorNotifier,
-                        builder: (_, color, __) {
-                          return ColorPicker(
-                            color: color,
-                            onChanged: (value) {
-                              setState(() {
-                                color = value;
-                                _color1 = value;
-                              });
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        });
+    showDialog(
+      context: context,
+      builder: (context) {
+        return ColorPickerDialog(
+          colorNotifier: _colorNotifier,
+          onColorChanged: (color) {
+            setState(() {
+              _color1 = color;
+            });
+          },
+        );
+      },
+    );
   }
 
   _showDialog2() {

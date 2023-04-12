@@ -7,6 +7,7 @@ class ColorPickerDialog extends StatelessWidget {
   final Function(Color) onColorChanged;
 
   const ColorPickerDialog({
+    super.key,
     required this.colorNotifier,
     required this.onColorChanged,
   });

@@ -234,7 +234,7 @@ class _HomePageState extends State<HomePage> {
                                 ))
                           ],
                         ),
-                        widthSpaceSize(),
+                        heightSpaceSize(),
                         SizedBox(
                           height: 50,
                           width: double.infinity,

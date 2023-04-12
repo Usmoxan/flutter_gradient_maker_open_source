@@ -282,7 +282,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  double mediaQueryWidth(BuildContext context) => mediaQueryWidth(context);
+  double mediaQueryWidth(BuildContext context) =>
+      MediaQuery.of(context).size.width;
 
   SizedBox heightSpaceSize() => const SizedBox(height: 10);
 

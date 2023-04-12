@@ -15,14 +15,12 @@ class ColorPickerButton extends StatefulWidget {
 class _ColorPickerButtonState extends State<ColorPickerButton> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        height: 40,
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey.shade300),
-          color: widget.color,
-          borderRadius: BorderRadius.circular(5),
-        ),
+    return Container(
+      height: 40,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.shade300),
+        color: widget.color,
+        borderRadius: BorderRadius.circular(5),
       ),
     );
   }

@@ -1,3 +1,4 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
 import 'dart:async';
 import 'dart:math';
 import 'package:cherry_toast/resources/arrays.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_gradient_maker/pages/mobile_gradient_container.dart';
 import 'package:flutter_gradient_maker/utils/colors.dart';
 import 'package:flutter_gradient_maker/utils/strings.dart';
 import 'package:cherry_toast/cherry_toast.dart';
-
 import '../widgets/color_picker_button.dart';
 import '../widgets/color_picker_dialog.dart';
 import '../widgets/style_selector_row.dart';
@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   Color _color1 = Color(Random().nextInt(0xffffffff));
   Color _color2 = Color(Random().nextInt(0xffffffff));
   //Notifier
+
   var _colorNotifier;
   var _colorNotifier2;
 

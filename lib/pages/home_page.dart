@@ -8,6 +8,8 @@ import 'package:icons_plus/icons_plus.dart';
 import '../widgets/button_selector.dart';
 import 'package:cherry_toast/cherry_toast.dart';
 
+import 'gradient_container.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -37,6 +39,8 @@ class _HomePageState extends State<HomePage> {
   Color gridItem7 = Colors.white;
   Color gridItem8 = Colors.white;
   Color gridItem9 = Colors.white;
+
+  //String
 
   //TextEditingController
   final firstColorEditingController = TextEditingController(text: '0');
@@ -243,6 +247,24 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    String linearCode = """
+                            LinearGradient(
+                      colors: [
+                                  $_color1,
+                                  $_color2,
+                                ],
+                                begin: $begin,
+                                end: $end,
+                      )""";
+
+    String radialCode = """
+                             RadialGradient(colors: [
+                                $_color1,
+                                $_color2,
+                              ], stops: const [
+                                0,
+                                1
+                              ], center: $begin, radius: 0.8),""";
     return SafeArea(
       child: Scaffold(
         body: Row(
@@ -441,7 +463,6 @@ class _HomePageState extends State<HomePage> {
                                       setState(() {
                                         _choice = 6;
                                         funcChoice(_choice, selectedColor);
-                                        print(_choice);
                                       });
                                     },
                                     icon: Bootstrap.arrow_right,
@@ -473,7 +494,6 @@ class _HomePageState extends State<HomePage> {
                                       setState(() {
                                         _choice = 8;
                                         funcChoice(_choice, selectedColor);
-                                        print(_choice);
                                       });
                                     },
                                     icon: Bootstrap.arrow_down,
@@ -572,25 +592,10 @@ class _HomePageState extends State<HomePage> {
                                     onPressed: () {
                                       if (isLinearStyle) {
                                         Clipboard.setData(
-                                            ClipboardData(text: """
-                            LinearGradient(
-                      colors: [
-                                  $_color1,
-                                  $_color2,
-                                ],
-                                begin: $begin,
-                                end: $end,
-                      )"""));
+                                            ClipboardData(text: linearCode));
                                       } else {
                                         Clipboard.setData(
-                                            ClipboardData(text: """
-                             RadialGradient(colors: [
-                                $_color1,
-                                $_color2,
-                              ], stops: const [
-                                0,
-                                1
-                              ], center: $begin, radius: 0.8),"""));
+                                            ClipboardData(text: radialCode));
                                       }
 
                                       CherryToast(
@@ -629,28 +634,12 @@ class _HomePageState extends State<HomePage> {
             ///
             ///
             if (MediaQuery.of(context).size.width > 500)
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: isLinearStyle
-                        ? LinearGradient(
-                            colors: [
-                              _color1,
-                              _color2,
-                            ],
-                            begin: begin,
-                            end: end,
-                          )
-                        : RadialGradient(
-                            colors: [
-                              _color1,
-                              _color2,
-                            ],
-                            center: begin,
-                            radius: 0.8,
-                          ),
-                  ),
-                ),
+              GradientContainer(
+                color1: _color1,
+                color2: _color2,
+                isLinearStyle: true,
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
           ],
         ),

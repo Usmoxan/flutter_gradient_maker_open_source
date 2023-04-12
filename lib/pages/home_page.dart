@@ -8,6 +8,7 @@ import 'package:icons_plus/icons_plus.dart';
 import '../widgets/button_selector.dart';
 import 'package:cherry_toast/cherry_toast.dart';
 
+import '../widgets/color_picker_dialog.dart';
 import 'gradient_container.dart';
 
 class HomePage extends StatefulWidget {
@@ -629,10 +630,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-
-            ///
-            ///
-            ///
             if (MediaQuery.of(context).size.width > 500)
               GradientContainer(
                 color1: _color1,
@@ -699,45 +696,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   _showDialog2() {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: SizedBox(
-              height: 500,
-              width: 1000,
-              child: Center(
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        icon: const Icon(IonIcons.close),
-                      ),
-                    ),
-                    SingleChildScrollView(
-                      child: ValueListenableBuilder<Color>(
-                        valueListenable: _colorNotifier2,
-                        builder: (_, color, __) {
-                          return ColorPicker(
-                              color: color,
-                              onChanged: (value) {
-                                setState(() {
-                                  color = value;
-                                  _color2 = value;
-                                });
-                              });
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        });
+    showDialog(
+      context: context,
+      builder: (context) {
+        return ColorPickerDialog(
+          colorNotifier: _colorNotifier2,
+          onColorChanged: (color) {
+            setState(() {
+              _color2 = color;
+            });
+          },
+        );
+      },
+    );
   }
 }

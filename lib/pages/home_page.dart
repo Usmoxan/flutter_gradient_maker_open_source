@@ -4,12 +4,11 @@ import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gradient_maker/widgets/strings.dart';
-import 'package:icons_plus/icons_plus.dart';
-import '../widgets/button_selector.dart';
 import 'package:cherry_toast/cherry_toast.dart';
 
 import '../widgets/color_picker_button.dart';
 import '../widgets/color_picker_dialog.dart';
+import 'direction_grid.dart';
 import 'gradient_container.dart';
 
 class HomePage extends StatefulWidget {
@@ -29,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   final Color selectedColor = const Color(0xFFDEEBFF);
   Color _color1 = Color(Random().nextInt(0xffffffff));
   Color _color2 = Color(Random().nextInt(0xffffffff));
-  int _choice = 1;
+  final int _choice = 1;
 
   //Colors Grids
   Color gridItem1 = const Color(0xFFDEEBFF);
@@ -381,143 +380,19 @@ class _HomePageState extends State<HomePage> {
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
-                        Column(
-                          children: [
-                            //TOP
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: OutlinedButtonSelection(
-                                    icon: Bootstrap.arrow_up_left,
-                                    onPressed: () {
-                                      setState(() {
-                                        _choice = 1;
-                                        funcChoice(_choice, selectedColor);
-                                      });
-                                    },
-                                    bgColor: gridItem1,
-                                  ),
-                                ),
-                                const SizedBox(width: 15),
-                                Expanded(
-                                  child: OutlinedButtonSelection(
-                                    onPressed: () {
-                                      setState(() {
-                                        _choice = 2;
-                                        funcChoice(_choice, selectedColor);
-                                      });
-                                    },
-                                    icon: Bootstrap.arrow_up,
-                                    bgColor: gridItem2,
-                                  ),
-                                ),
-                                const SizedBox(width: 15),
-                                Expanded(
-                                  child: OutlinedButtonSelection(
-                                    onPressed: () {
-                                      setState(() {
-                                        _choice = 3;
-                                        funcChoice(_choice, selectedColor);
-                                      });
-                                    },
-                                    icon: Bootstrap.arrow_up_right,
-                                    bgColor: gridItem3,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            //CENTER
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: OutlinedButtonSelection(
-                                    icon: Bootstrap.arrow_left,
-                                    onPressed: () {
-                                      setState(() {
-                                        _choice = 4;
-                                        funcChoice(_choice, selectedColor);
-                                      });
-                                    },
-                                    bgColor: gridItem4,
-                                  ),
-                                ),
-                                const SizedBox(width: 15),
-                                Expanded(
-                                  child: isLinearStyle
-                                      ? Container()
-                                      : OutlinedButtonSelection(
-                                          onPressed: () {
-                                            setState(() {
-                                              _choice = 5;
-                                              funcChoice(
-                                                  _choice, selectedColor);
-                                            });
-                                          },
-                                          icon: Bootstrap.circle10,
-                                          bgColor: gridItem5,
-                                        ),
-                                ),
-                                const SizedBox(width: 15),
-                                Expanded(
-                                  child: OutlinedButtonSelection(
-                                    onPressed: () {
-                                      setState(() {
-                                        _choice = 6;
-                                        funcChoice(_choice, selectedColor);
-                                      });
-                                    },
-                                    icon: Bootstrap.arrow_right,
-                                    bgColor: gridItem6,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            //BOTTOM
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: OutlinedButtonSelection(
-                                    icon: Bootstrap.arrow_down_left,
-                                    onPressed: () {
-                                      setState(() {
-                                        _choice = 7;
-                                        funcChoice(_choice, selectedColor);
-                                      });
-                                    },
-                                    bgColor: gridItem7,
-                                  ),
-                                ),
-                                const SizedBox(width: 15),
-                                Expanded(
-                                  child: OutlinedButtonSelection(
-                                    onPressed: () {
-                                      setState(() {
-                                        _choice = 8;
-                                        funcChoice(_choice, selectedColor);
-                                      });
-                                    },
-                                    icon: Bootstrap.arrow_down,
-                                    bgColor: gridItem8,
-                                  ),
-                                ),
-                                const SizedBox(width: 15),
-                                Expanded(
-                                  child: OutlinedButtonSelection(
-                                    onPressed: () {
-                                      setState(() {
-                                        _choice = 9;
-                                        funcChoice(_choice, selectedColor);
-                                      });
-                                    },
-                                    icon: Bootstrap.arrow_down_right,
-                                    bgColor: gridItem9,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                        ToolsPanel(
+                          funcChoice: funcChoice,
+                          gridItem1: gridItem1,
+                          gridItem2: gridItem2,
+                          gridItem3: gridItem3,
+                          gridItem4: gridItem4,
+                          gridItem5: gridItem5,
+                          gridItem6: gridItem6,
+                          gridItem7: gridItem7,
+                          gridItem8: gridItem8,
+                          gridItem9: gridItem9,
+                          isLinearStyle: isLinearStyle,
+                          selectedColor: selectedColor,
                         ),
                         const SizedBox(height: 10),
                         Padding(
@@ -573,7 +448,6 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-
                         const SizedBox(height: 10),
                         Row(
                           children: [
@@ -622,9 +496,9 @@ class _HomePageState extends State<HomePage> {
               GradientContainer(
                 color1: _color1,
                 color2: _color2,
-                isLinearStyle: true,
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+                isLinearStyle: isLinearStyle,
+                begin: begin,
+                end: end,
               ),
           ],
         ),

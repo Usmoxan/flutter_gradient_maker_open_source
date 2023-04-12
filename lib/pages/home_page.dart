@@ -4,8 +4,8 @@ import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gradient_maker/pages/mobile_gradient_container.dart';
-import 'package:flutter_gradient_maker/pages/utils/colors.dart';
-import 'package:flutter_gradient_maker/widgets/strings.dart';
+import 'package:flutter_gradient_maker/utils/colors.dart';
+import 'package:flutter_gradient_maker/utils/strings.dart';
 import 'package:cherry_toast/cherry_toast.dart';
 
 import '../widgets/color_picker_button.dart';
@@ -35,6 +35,7 @@ class _HomePageState extends State<HomePage> {
   final Color selectedColor = const Color(0xFFDEEBFF);
   Color _color1 = Color(Random().nextInt(0xffffffff));
   Color _color2 = Color(Random().nextInt(0xffffffff));
+  //Notifier
   var _colorNotifier;
   var _colorNotifier2;
 

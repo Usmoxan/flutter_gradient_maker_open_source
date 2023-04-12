@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gradient_maker/pages/mobile_gradient_container.dart';
+import 'package:flutter_gradient_maker/pages/utils/colors.dart';
 import 'package:flutter_gradient_maker/widgets/strings.dart';
 import 'package:cherry_toast/cherry_toast.dart';
 
@@ -21,217 +23,71 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _formKey = GlobalKey<FormState>();
-  //Alignment
+  //Alignments
   Alignment begin = Alignment.bottomRight;
   Alignment end = Alignment.topLeft;
 
+  //Styles
   TextStyle widgetsTitle =
       const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
 
-  //colors
+  //Colors
   final Color selectedColor = const Color(0xFFDEEBFF);
   Color _color1 = Color(Random().nextInt(0xffffffff));
   Color _color2 = Color(Random().nextInt(0xffffffff));
-  final int _choice = 1;
-
-  //Colors Grids
-  Color gridItem1 = const Color(0xFFDEEBFF);
-  Color gridItem2 = Colors.white;
-  Color gridItem3 = Colors.white;
-  Color gridItem4 = Colors.white;
-  Color gridItem5 = Colors.white;
-  Color gridItem6 = Colors.white;
-  Color gridItem7 = Colors.white;
-  Color gridItem8 = Colors.white;
-  Color gridItem9 = Colors.white;
-
-  //String
-
-  //TextEditingController
-  final firstColorEditingController = TextEditingController(text: '0');
-  final secondColorEditingController = TextEditingController(text: '100');
-
-  void funcChoice(int choice, Color selectedColor) {
-    switch (choice) {
-      case 1:
-        {
-          setState(() {
-            gridItem1 = selectedColor;
-            gridItem2 = Colors.white;
-            gridItem3 = Colors.white;
-            gridItem4 = Colors.white;
-            gridItem5 = Colors.white;
-            gridItem6 = Colors.white;
-            gridItem7 = Colors.white;
-            gridItem8 = Colors.white;
-            gridItem9 = Colors.white;
-            begin = Alignment.bottomRight;
-            end = Alignment.topLeft;
-          });
-        }
-
-        break;
-      case 2:
-        {
-          setState(() {
-            gridItem2 = selectedColor;
-            gridItem1 = Colors.white;
-            gridItem3 = Colors.white;
-            gridItem4 = Colors.white;
-            gridItem5 = Colors.white;
-            gridItem6 = Colors.white;
-            gridItem7 = Colors.white;
-            gridItem8 = Colors.white;
-            gridItem9 = Colors.white;
-            begin = Alignment.bottomCenter;
-            end = Alignment.topCenter;
-          });
-        }
-
-        break;
-      case 3:
-        {
-          setState(() {
-            gridItem3 = selectedColor;
-            gridItem2 = Colors.white;
-            gridItem1 = Colors.white;
-            gridItem4 = Colors.white;
-            gridItem5 = Colors.white;
-            gridItem6 = Colors.white;
-            gridItem7 = Colors.white;
-            gridItem8 = Colors.white;
-            gridItem9 = Colors.white;
-            begin = Alignment.bottomLeft;
-            end = Alignment.topRight;
-          });
-        }
-
-        break;
-      case 4:
-        {
-          setState(() {
-            gridItem4 = selectedColor;
-            gridItem2 = Colors.white;
-            gridItem3 = Colors.white;
-            gridItem1 = Colors.white;
-            gridItem5 = Colors.white;
-            gridItem6 = Colors.white;
-            gridItem7 = Colors.white;
-            gridItem8 = Colors.white;
-            gridItem9 = Colors.white;
-            begin = Alignment.centerRight;
-            end = Alignment.centerLeft;
-          });
-        }
-
-        break;
-      case 5:
-        {
-          setState(() {
-            gridItem5 = selectedColor;
-            gridItem2 = Colors.white;
-            gridItem3 = Colors.white;
-            gridItem4 = Colors.white;
-            gridItem1 = Colors.white;
-            gridItem6 = Colors.white;
-            gridItem7 = Colors.white;
-            gridItem8 = Colors.white;
-            gridItem9 = Colors.white;
-            begin = Alignment.center;
-            end = Alignment.center;
-          });
-        }
-
-        break;
-      case 6:
-        {
-          setState(() {
-            gridItem6 = selectedColor;
-            gridItem2 = Colors.white;
-            gridItem3 = Colors.white;
-            gridItem4 = Colors.white;
-            gridItem5 = Colors.white;
-            gridItem1 = Colors.white;
-            gridItem7 = Colors.white;
-            gridItem8 = Colors.white;
-            gridItem9 = Colors.white;
-            begin = Alignment.centerLeft;
-            end = Alignment.centerRight;
-          });
-        }
-
-        break;
-      case 7:
-        {
-          setState(() {
-            gridItem7 = selectedColor;
-            gridItem2 = Colors.white;
-            gridItem3 = Colors.white;
-            gridItem4 = Colors.white;
-            gridItem5 = Colors.white;
-            gridItem6 = Colors.white;
-            gridItem1 = Colors.white;
-            gridItem8 = Colors.white;
-            gridItem9 = Colors.white;
-            begin = Alignment.topRight;
-            end = Alignment.bottomLeft;
-          });
-        }
-
-        break;
-      case 8:
-        {
-          setState(() {
-            gridItem8 = selectedColor;
-            gridItem2 = Colors.white;
-            gridItem3 = Colors.white;
-            gridItem4 = Colors.white;
-            gridItem5 = Colors.white;
-            gridItem6 = Colors.white;
-            gridItem7 = Colors.white;
-            gridItem1 = Colors.white;
-            gridItem9 = Colors.white;
-            begin = Alignment.topCenter;
-            end = Alignment.bottomCenter;
-          });
-        }
-
-        break;
-      case 9:
-        {
-          setState(() {
-            gridItem9 = selectedColor;
-            gridItem2 = Colors.white;
-            gridItem3 = Colors.white;
-            gridItem4 = Colors.white;
-            gridItem5 = Colors.white;
-            gridItem6 = Colors.white;
-            gridItem7 = Colors.white;
-            gridItem8 = Colors.white;
-            gridItem1 = Colors.white;
-            begin = Alignment.topLeft;
-            end = Alignment.bottomRight;
-          });
-        }
-
-        break;
-      default:
-    }
-  }
-
-  //colors
   var _colorNotifier;
   var _colorNotifier2;
 
   final Color _selectedColor = const Color(0xFFDEEBFF);
 
-  //bools
+  //Colors Grids
+  Color gridItem1 = const Color(0xFFDEEBFF);
+  Color gridItem2 = white;
+  Color gridItem3 = white;
+  Color gridItem4 = white;
+  Color gridItem5 = white;
+  Color gridItem6 = white;
+  Color gridItem7 = white;
+  Color gridItem8 = white;
+  Color gridItem9 = white;
+
+  //TextEditingController
+  final firstColorEditingController = TextEditingController(text: '0');
+  final secondColorEditingController = TextEditingController(text: '100');
+
+  //INFO: Choice Function
+  void funcChoice(int choice, Color selectedColor) {
+    List<Color> gridColors = List.filled(9, white);
+    List<Alignment> gridAlignments = [
+      Alignment.bottomRight,
+      Alignment.bottomCenter,
+      Alignment.bottomLeft,
+      Alignment.centerRight,
+      Alignment.center,
+      Alignment.centerLeft,
+      Alignment.topRight,
+      Alignment.topCenter,
+      Alignment.topLeft,
+    ];
+
+    gridColors[choice - 1] = selectedColor;
+    begin = gridAlignments[choice - 1];
+    end = begin * -1.0;
+    setState(() {
+      gridItem1 = gridColors[0];
+      gridItem2 = gridColors[1];
+      gridItem3 = gridColors[2];
+      gridItem4 = gridColors[3];
+      gridItem5 = gridColors[4];
+      gridItem6 = gridColors[5];
+      gridItem7 = gridColors[6];
+      gridItem8 = gridColors[7];
+      gridItem9 = gridColors[8];
+    });
+  }
+
+  //Bools
   bool isLinearStyle = true;
-
-  //doubles
-
-  double first = 0;
-  double second = 100;
 
   @override
   void initState() {
@@ -252,91 +108,48 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    String linearCode = """
-                            LinearGradient(
-                      colors: [
-                                  $_color1,
-                                  $_color2,
-                                ],
-                                begin: $begin,
-                                end: $end,
-                      )""";
-
-    String radialCode = """
-                             RadialGradient(colors: [
-                                $_color1,
-                                $_color2,
-                              ], stops: const [
-                                0,
-                                1
-                              ], center: $begin, radius: 0.8),""";
+    String linearCode = generateLinearCode(_color1, _color2, begin, end);
+    String radialCode = generateRadialCode(_color1, _color2, begin);
     return SafeArea(
       child: Scaffold(
         body: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ///
             Form(
               key: _formKey,
               child: SizedBox(
                 width: 350,
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.all(
-                        MediaQuery.of(context).size.width > 500 ? 50 : 8),
+                    padding:
+                        EdgeInsets.all(mediaQueryWidth(context) > 500 ? 50 : 8),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // const Spacer(),
-                        MediaQuery.of(context).size.width > 500
+                        mediaQueryWidth(context) > 500
                             ? Text(
                                 "Flutter\nGradient\nGenerator Pro"
                                     .toUpperCase(),
                                 style: const TextStyle(
                                     fontSize: 25, fontWeight: FontWeight.bold),
                               )
-                            : Container(
-                                height: 200,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  border:
-                                      Border.all(color: Colors.grey.shade300),
-                                  gradient: isLinearStyle
-                                      ? LinearGradient(
-                                          colors: [
-                                            _color1,
-                                            _color2,
-                                          ],
-                                          begin: begin,
-                                          end: end,
-                                        )
-                                      : RadialGradient(
-                                          colors: [
-                                            _color1,
-                                            _color2,
-                                          ],
-                                          center: begin,
-                                          radius: 0.8,
-                                        ),
-                                ),
-                              ),
+                            : MobileGradientContainer(
+                                isLinearStyle: isLinearStyle,
+                                color1: _color1,
+                                color2: _color2,
+                                begin: begin,
+                                end: end),
                         SizedBox(
-                            height: MediaQuery.of(context).size.width > 500
-                                ? 40
-                                : 10),
+                            height: mediaQueryWidth(context) > 500 ? 40 : 10),
                         Padding(
                           padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          child: Text(
-                            "Style",
-                            style: widgetsTitle,
-                          ),
+                          child: Text("Style", style: widgetsTitle),
                         ),
                         Visibility(
-                            visible: MediaQuery.of(context).size.width > 500
-                                ? true
-                                : false,
+                            visible:
+                                mediaQueryWidth(context) > 500 ? true : false,
                             child: const SizedBox(height: 10)),
                         StyleSelectorRow(
                           isLinearStyle: isLinearStyle,
@@ -352,30 +165,25 @@ class _HomePageState extends State<HomePage> {
                             });
                           },
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          child: Text(
-                            "Direction",
-                            style: widgetsTitle,
-                          ),
-                        ),
+                        heightSpaceSize(),
+                        Text("Direction", style: widgetsTitle),
+                        heightSpaceSize(),
                         ToolsPanel(
-                          funcChoice: funcChoice,
-                          gridItem1: gridItem1,
-                          gridItem2: gridItem2,
-                          gridItem3: gridItem3,
-                          gridItem4: gridItem4,
-                          gridItem5: gridItem5,
-                          gridItem6: gridItem6,
-                          gridItem7: gridItem7,
-                          gridItem8: gridItem8,
-                          gridItem9: gridItem9,
-                          isLinearStyle: isLinearStyle,
-                          selectedColor: selectedColor,
-                        ),
-                        const SizedBox(height: 10),
+                            funcChoice: funcChoice,
+                            gridItem1: gridItem1,
+                            gridItem2: gridItem2,
+                            gridItem3: gridItem3,
+                            gridItem4: gridItem4,
+                            gridItem5: gridItem5,
+                            gridItem6: gridItem6,
+                            gridItem7: gridItem7,
+                            gridItem8: gridItem8,
+                            gridItem9: gridItem9,
+                            isLinearStyle: isLinearStyle,
+                            selectedColor: selectedColor),
+                        heightSpaceSize(),
                         Padding(
-                          padding: MediaQuery.of(context).size.width > 500
+                          padding: mediaQueryWidth(context) > 500
                               ? const EdgeInsets.only(top: 10, bottom: 10)
                               : const EdgeInsets.all(0),
                           child: Row(
@@ -388,7 +196,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                         const SizedBox(height: 10),
+                        heightSpaceSize(),
                         Row(
                           children: [
                             Expanded(
@@ -399,7 +207,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 10),
+                            widthSpaceSize(),
                             Expanded(
                               child: GestureDetector(
                                 onTap: _showDialog2,
@@ -408,7 +216,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 10),
+                            widthSpaceSize(),
                             OutlinedButton(
                                 onPressed: () {
                                   setState(() {
@@ -459,7 +267,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            if (MediaQuery.of(context).size.width > 500)
+            if (mediaQueryWidth(context) > 500)
               GradientContainer(
                 color1: _color1,
                 color2: _color2,
@@ -472,6 +280,12 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  double mediaQueryWidth(BuildContext context) => mediaQueryWidth(context);
+
+  SizedBox heightSpaceSize() => const SizedBox(height: 10);
+
+  SizedBox widthSpaceSize() => const SizedBox(width: 10);
 
   _showDialog1() {
     showDialog(

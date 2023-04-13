@@ -18,6 +18,9 @@ class _ColorShadesScreenState extends State<ColorShadesScreen> {
     });
   }
 
+  double mediaQueryWidth(BuildContext context) =>
+      MediaQuery.of(context).size.width;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +41,8 @@ class _ColorShadesScreenState extends State<ColorShadesScreen> {
             Expanded(
                 child: GridView.builder(
               itemCount: _colorModel.shades.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: mediaQueryWidth(context) > 500 ? 5 : 3,
                 // mainAxisSpacing: 10,
                 // crossAxisSpacing: 10,
                 childAspectRatio: 1,

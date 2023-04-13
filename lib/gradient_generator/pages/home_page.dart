@@ -8,11 +8,13 @@ import 'package:flutter_gradient_maker/gradient_generator/pages/mobile_gradient_
 import 'package:flutter_gradient_maker/gradient_generator/utils/colors.dart';
 import 'package:flutter_gradient_maker/gradient_generator/utils/strings.dart';
 import 'package:cherry_toast/cherry_toast.dart';
+import '../../color_shade_generator/shade_generator_main.dart';
 import '../widgets/color_picker_button.dart';
 import '../widgets/color_picker_dialog.dart';
 import '../widgets/style_selector_row.dart';
 import 'direction_grid.dart';
 import 'gradient_container.dart';
+import 'package:badges/badges.dart' as badges;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -259,7 +261,61 @@ class _HomePageState extends State<HomePage> {
                               },
                               child: const Text(copyText)),
                         ),
-                        const SizedBox(height: 10),
+                        heightSpaceSize(),
+                        Padding(
+                          padding: mediaQueryWidth(context) > 500
+                              ? const EdgeInsets.only(top: 10, bottom: 10)
+                              : const EdgeInsets.all(0),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Other features",
+                                style: widgetsTitle,
+                              ),
+                              const Spacer(),
+                            ],
+                          ),
+                        ),
+                        heightSpaceSize(),
+                        badges.Badge(
+                          badgeStyle: const badges.BadgeStyle(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1),
+                            // shape: badges.BadgeShape.triangle,
+                            badgeGradient: badges.BadgeGradient.linear(
+                              colors: [
+                                Colors.red,
+                                Colors.orange,
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                          ),
+                          badgeAnimation: const badges.BadgeAnimation.fade(
+                            animationDuration: Duration(seconds: 1),
+                            loopAnimation: false,
+                          ),
+                          ignorePointer: false,
+                          badgeContent: const Text(
+                            'BETA',
+                            style: TextStyle(color: Colors.white, fontSize: 8),
+                          ),
+                          position: badges.BadgePosition.topEnd(top: -12),
+                          child: OutlinedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ColorShadesScreen(),
+                                    ));
+                              },
+                              child: const Text(
+                                "Color Shade Generator",
+                                style: TextStyle(color: Colors.black),
+                              )),
+                        ),
+                        heightSpaceSize(),
                         const Center(
                           child: Text(creatorName),
                         )

@@ -24,7 +24,7 @@ String generateLinearCode(Color color1, Color color2, Alignment begin, end) {
            $color1,
             $color2,
         ],
-        begin: begin,
+        begin: $begin,
         end: $end,
       )
     """;

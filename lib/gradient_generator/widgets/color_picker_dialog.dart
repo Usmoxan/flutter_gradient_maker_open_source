@@ -16,7 +16,7 @@ class ColorPickerDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       content: SizedBox(
-        height: 500,
+        height: 600,
         width: 1000,
         child: Center(
           child: Column(

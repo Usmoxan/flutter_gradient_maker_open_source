@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gradient_maker/pages/splash_page.dart';
+
+import 'gradient_generator/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
-      home: const SplashPage(),
+      home: const HomePage(),
     );
   }
 }

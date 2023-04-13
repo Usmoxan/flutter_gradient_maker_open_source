@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gradient_maker/pages/home_page.dart';
+import 'package:flutter_gradient_maker/gradient_generator/pages/home_page.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class SplashPage extends StatefulWidget {

@@ -9,6 +9,8 @@ import 'package:flutter_gradient_maker/gradient_generator/utils/colors.dart';
 import 'package:flutter_gradient_maker/gradient_generator/utils/strings.dart';
 import 'package:cherry_toast/cherry_toast.dart';
 import '../../color_shade_generator/shade_generator_main.dart';
+import '../../container_editor/main_page.dart';
+import '../../hex_to_rgba/main_page.dart';
 import '../widgets/color_picker_button.dart';
 import '../widgets/color_picker_dialog.dart';
 import '../widgets/style_selector_row.dart';
@@ -277,43 +279,38 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         heightSpaceSize(),
-                        badges.Badge(
-                          badgeStyle: const badges.BadgeStyle(
-                            borderSide:
-                                BorderSide(color: Colors.white, width: 1),
-                            // shape: badges.BadgeShape.triangle,
-                            badgeGradient: badges.BadgeGradient.linear(
-                              colors: [
-                                Colors.red,
-                                Colors.orange,
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                            ),
-                          ),
-                          badgeAnimation: const badges.BadgeAnimation.fade(
-                            animationDuration: Duration(seconds: 1),
-                            loopAnimation: false,
-                          ),
-                          ignorePointer: false,
-                          badgeContent: const Text(
-                            'BETA',
-                            style: TextStyle(color: Colors.white, fontSize: 8),
-                          ),
-                          position: badges.BadgePosition.topEnd(top: -12),
-                          child: OutlinedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ColorShadesScreen(),
-                                    ));
-                              },
-                              child: const Text(
-                                "Color Shade Generator",
-                                style: TextStyle(color: Colors.black),
-                              )),
+                        badgeButton(
+                          text: "Color Shade Generator",
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ColorShadesScreen(),
+                                ));
+                          },
+                        ),
+                        heightSpaceSize(),
+                        badgeButton(
+                          text: "HEX to RGBA",
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const HEXtoRGBA(),
+                                ));
+                          },
+                        ),
+                        heightSpaceSize(),
+                        badgeButton(
+                          text: "Container Editor",
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ContainerEditor(),
+                                ));
+                          },
                         ),
                         heightSpaceSize(),
                         const Center(
@@ -375,6 +372,50 @@ class _HomePageState extends State<HomePage> {
           },
         );
       },
+    );
+  }
+}
+
+class badgeButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onPressed;
+  const badgeButton({
+    super.key,
+    required this.text,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return badges.Badge(
+      badgeStyle: const badges.BadgeStyle(
+        borderSide: BorderSide(color: Colors.white, width: 1),
+        // shape: badges.BadgeShape.triangle,
+        badgeGradient: badges.BadgeGradient.linear(
+          colors: [
+            Colors.red,
+            Colors.orange,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      badgeAnimation: const badges.BadgeAnimation.fade(
+        animationDuration: Duration(seconds: 1),
+        loopAnimation: false,
+      ),
+      ignorePointer: false,
+      badgeContent: const Text(
+        'BETA',
+        style: TextStyle(color: Colors.white, fontSize: 8),
+      ),
+      position: badges.BadgePosition.topEnd(top: -12),
+      child: OutlinedButton(
+          onPressed: onPressed,
+          child: Text(
+            text,
+            style: const TextStyle(color: Colors.black),
+          )),
     );
   }
 }

@@ -280,6 +280,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                         heightSpaceSize(),
                         badgeButton(
+                          color1: Colors.red,
+                          color2: Colors.amber,
+                          type: "BETA",
                           text: "Color Shade Generator",
                           onPressed: () {
                             Navigator.push(
@@ -292,6 +295,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                         heightSpaceSize(),
                         badgeButton(
+                          color1: Colors.blue,
+                          color2: Colors.green,
+                          type: "NEW",
                           text: "HEX to RGBA",
                           onPressed: () {
                             Navigator.push(
@@ -303,6 +309,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                         heightSpaceSize(),
                         badgeButton(
+                          color1: Colors.red,
+                          color2: Colors.amber,
+                          type: "BETA",
                           text: "Container Editor",
                           onPressed: () {
                             Navigator.push(
@@ -378,23 +387,29 @@ class _HomePageState extends State<HomePage> {
 
 class badgeButton extends StatelessWidget {
   final String text;
+  final String type;
+  final Color color1;
+  final Color color2;
   final VoidCallback onPressed;
   const badgeButton({
     super.key,
     required this.text,
     required this.onPressed,
+    required this.type,
+    required this.color1,
+    required this.color2,
   });
 
   @override
   Widget build(BuildContext context) {
     return badges.Badge(
-      badgeStyle: const badges.BadgeStyle(
-        borderSide: BorderSide(color: Colors.white, width: 1),
+      badgeStyle: badges.BadgeStyle(
+        borderSide: const BorderSide(color: Colors.white, width: 1),
         // shape: badges.BadgeShape.triangle,
         badgeGradient: badges.BadgeGradient.linear(
           colors: [
-            Colors.red,
-            Colors.orange,
+            color1,
+            color2,
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -405,9 +420,9 @@ class badgeButton extends StatelessWidget {
         loopAnimation: false,
       ),
       ignorePointer: false,
-      badgeContent: const Text(
-        'BETA',
-        style: TextStyle(color: Colors.white, fontSize: 8),
+      badgeContent: Text(
+        type,
+        style: const TextStyle(color: Colors.white, fontSize: 8),
       ),
       position: badges.BadgePosition.topEnd(top: -12),
       child: OutlinedButton(

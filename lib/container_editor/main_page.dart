@@ -13,7 +13,7 @@ class _ContainerEditorState extends State<ContainerEditor> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: MediaQuery.of(context).size.width > 500
+      body: MediaQuery.of(context).size.width > 700
           ? const DesktopPage()
           : const MobilePage(),
     );

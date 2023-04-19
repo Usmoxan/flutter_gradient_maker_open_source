@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gradient_maker/color_shade_generator/shade_color_picker.dart';
+import 'package:meta_seo/meta_seo.dart';
 import 'models/color_model.dart';
 
 class ColorShadesScreen extends StatefulWidget {
@@ -24,6 +26,18 @@ class _ColorShadesScreenState extends State<ColorShadesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (kIsWeb) {
+      // Define MetaSEO object
+      MetaSEO meta = MetaSEO();
+      // add meta seo data for web app as you want
+      meta.author(author: 'Usmoxan');
+      meta.description(
+          description:
+              'Gradient maker app for Flutter and Container editor, Color shade Generator, HEX to RGBA converter. The app is not fully finished Flutter little tools for you please use for free.');
+      meta.keywords(
+          keywords:
+              'Flutter, Dart, Flutter Gradient, Gradient Maker Flutter, Web');
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Color Shades Generator'),

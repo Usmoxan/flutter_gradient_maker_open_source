@@ -2,12 +2,14 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:cherry_toast/resources/arrays.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gradient_maker/gradient_generator/pages/mobile_gradient_container.dart';
 import 'package:flutter_gradient_maker/gradient_generator/utils/colors.dart';
 import 'package:flutter_gradient_maker/gradient_generator/utils/strings.dart';
 import 'package:cherry_toast/cherry_toast.dart';
+import 'package:meta_seo/meta_seo.dart';
 import '../../color_shade_generator/shade_generator_main.dart';
 import '../../container_editor/main_page.dart';
 import '../../hex_to_rgba/main_page.dart';
@@ -114,6 +116,18 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+       if (kIsWeb) {
+      // Define MetaSEO object
+      MetaSEO meta = MetaSEO();
+      // add meta seo data for web app as you want
+      meta.author(author: 'Usmoxan');
+      meta.description(
+          description:
+              'Gradient maker app for Flutter and Container editor, Color shade Generator, HEX to RGBA converter. The app is not fully finished Flutter little tools for you please use for free.');
+      meta.keywords(
+          keywords:
+              'Flutter, Dart, Flutter Gradient, Gradient Maker Flutter, Web');
+    }
     String linearCode = generateLinearCode(_color1, _color2, begin, end);
     String radialCode = generateRadialCode(_color1, _color2, begin);
     return SafeArea(

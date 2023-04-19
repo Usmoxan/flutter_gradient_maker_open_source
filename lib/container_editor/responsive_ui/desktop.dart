@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'dart:async';
 
 import 'package:cherry_toast/cherry_toast.dart';
@@ -65,13 +67,6 @@ class _DesktopPageState extends State<DesktopPage> {
     _colorNotifier3 = ValueNotifier<Color>(mainContainerShadowColor);
   }
 
-  void _onColorChanged(Color color) {
-    setState(() {
-      mainContainerColor = color;
-      mainContainerBorderColor = color;
-      mainContainerShadowColor = color;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

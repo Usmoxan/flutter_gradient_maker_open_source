@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
+// ignore_for_file: prefer_typing_uninitialized_variables, camel_case_types
 import 'dart:async';
 import 'dart:math';
 import 'package:cherry_toast/resources/arrays.dart';

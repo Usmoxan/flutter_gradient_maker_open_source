@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gradient_maker/container_editor/responsive_ui/desktop.dart';
-import 'package:flutter_gradient_maker/container_editor/responsive_ui/mobile.dart';
+import 'package:flutter_gradient_maker/screens/container_editor/responsive_ui/desktop.dart';
+import 'package:flutter_gradient_maker/screens/container_editor/responsive_ui/mobile.dart';
 import 'package:meta_seo/meta_seo.dart';
 
 class ContainerEditor extends StatefulWidget {

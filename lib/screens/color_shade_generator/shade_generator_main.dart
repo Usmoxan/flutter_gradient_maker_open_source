@@ -3,7 +3,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gradient_maker/color_shade_generator/shade_color_picker.dart';
+import 'package:flutter_gradient_maker/screens/color_shade_generator/shade_color_picker.dart';
 import 'package:meta_seo/meta_seo.dart';
 import 'models/color_model.dart';
 

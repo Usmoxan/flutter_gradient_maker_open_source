@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gradient_maker/screens/home/main_home.dart';
 import 'package:meta_seo/meta_seo.dart';
 import 'package:flutter/foundation.dart';
-import 'gradient_generator/pages/home_page.dart';
 
 void main() {
   // It is required to add the following to run the meta_seo package correctly
@@ -35,9 +35,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Small Tools',
       theme: ThemeData(
         useMaterial3: true,
-        primarySwatch: Colors.blue,
+        // primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: const HomeMainScreen(),
     );
   }
 }

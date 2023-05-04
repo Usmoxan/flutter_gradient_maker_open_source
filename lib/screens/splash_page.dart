@@ -47,7 +47,7 @@ class _SplashPageState extends State<SplashPage> {
                 width: 150, height: 150, child: Image.asset('assets/icon.png')),
             const SizedBox(height: 15),
             const Text(
-              "Flutter Gradient Maker Pro",
+              "Flutter Small Tools",
               style: TextStyle(
                 fontSize: 30,
                 color: Colors.white,

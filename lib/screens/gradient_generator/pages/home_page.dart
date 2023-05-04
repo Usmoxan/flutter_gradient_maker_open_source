@@ -9,15 +9,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gradient_maker/screens/gradient_generator/utils/colors.dart';
 import 'package:flutter_gradient_maker/screens/gradient_generator/utils/strings.dart';
 import 'package:meta_seo/meta_seo.dart';
-import '../../color_converter/main_page.dart';
-import '../../color_shade_generator/shade_generator_main.dart';
-import '../../container_editor/main_page.dart';
 import '../widgets/color_picker_button.dart';
 import '../widgets/color_picker_dialog.dart';
 import '../widgets/style_selector_row.dart';
 import 'direction_grid.dart';
 import 'gradient_container.dart';
-import 'package:badges/badges.dart' as badges;
 
 import 'mobile_gradient_container.dart';
 
@@ -222,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           children: [
                             Text(
-                              "Color & Stops",
+                              "Colors",
                               style: widgetsTitle,
                             ),
                             const Spacer(),
@@ -288,63 +284,6 @@ class _HomePageState extends State<HomePage> {
                             child: const Text(copyText)),
                       ),
                       heightSpaceSize(),
-                      Padding(
-                        padding: mediaQueryWidth(context) > 500
-                            ? const EdgeInsets.only(top: 10, bottom: 10)
-                            : const EdgeInsets.all(0),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Other features",
-                              style: widgetsTitle,
-                            ),
-                            const Spacer(),
-                          ],
-                        ),
-                      ),
-                      heightSpaceSize(),
-                      badgeButton(
-                        color1: Colors.red,
-                        color2: Colors.amber,
-                        type: "BETA",
-                        text: "Color Shade Generator",
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const ColorShadesScreen(),
-                              ));
-                        },
-                      ),
-                      heightSpaceSize(),
-                      badgeButton(
-                        color1: Colors.blue,
-                        color2: Colors.green,
-                        type: "NEW",
-                        text: "Color Converter",
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const HEXtoRGBA(),
-                              ));
-                        },
-                      ),
-                      heightSpaceSize(),
-                      badgeButton(
-                        color1: Colors.red,
-                        color2: Colors.amber,
-                        type: "BETA",
-                        text: "Container Editor",
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const ContainerEditor(),
-                              ));
-                        },
-                      ),
-                      heightSpaceSize(),
                       const Center(
                         child: Text(creatorName),
                       )
@@ -395,56 +334,6 @@ class _HomePageState extends State<HomePage> {
           },
         );
       },
-    );
-  }
-}
-
-class badgeButton extends StatelessWidget {
-  final String text;
-  final String type;
-  final Color color1;
-  final Color color2;
-  final VoidCallback onPressed;
-  const badgeButton({
-    super.key,
-    required this.text,
-    required this.onPressed,
-    required this.type,
-    required this.color1,
-    required this.color2,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return badges.Badge(
-      badgeStyle: badges.BadgeStyle(
-        borderSide: const BorderSide(color: Colors.white, width: 1),
-        // shape: badges.BadgeShape.triangle,
-        badgeGradient: badges.BadgeGradient.linear(
-          colors: [
-            color1,
-            color2,
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-      ),
-      badgeAnimation: const badges.BadgeAnimation.fade(
-        animationDuration: Duration(seconds: 1),
-        loopAnimation: false,
-      ),
-      ignorePointer: false,
-      badgeContent: Text(
-        type,
-        style: const TextStyle(color: Colors.white, fontSize: 8),
-      ),
-      position: badges.BadgePosition.topEnd(top: -12),
-      child: OutlinedButton(
-          onPressed: onPressed,
-          child: Text(
-            text,
-            style: const TextStyle(color: Colors.black),
-          )),
     );
   }
 }

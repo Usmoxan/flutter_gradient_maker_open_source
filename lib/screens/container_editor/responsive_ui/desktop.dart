@@ -67,7 +67,6 @@ class _DesktopPageState extends State<DesktopPage> {
     _colorNotifier3 = ValueNotifier<Color>(mainContainerShadowColor);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +105,7 @@ class _DesktopPageState extends State<DesktopPage> {
           Expanded(
             flex: 3,
             child: Container(
-              color: const Color(0xffE4E4E4),
+                 color: const Color(0xFFF8F9FB),
               child: Center(
                 child: Opacity(
                   opacity: opacityValue,
@@ -142,269 +141,276 @@ class _DesktopPageState extends State<DesktopPage> {
           Expanded(
             flex: 1,
             child: Container(
-              color: Colors.white,
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(25.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Color",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          heightBox(),
-                          GestureDetector(
-                            onTap: _showBackgroundColorDialog,
-                            child: Container(
-                              width: 80,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.grey.shade300),
-                                  color: mainContainerColor,
-                                  borderRadius: BorderRadius.circular(10)),
+              height: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(25.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Color",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
                             ),
-                          ),
-                          heightBox(),
-                          const Divider(thickness: .5),
-                          heightBox(),
-                          const Text(
-                            "Radius",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          heightBox(),
-                          SegmentedButton(
-                            segments: const [
-                              ButtonSegment(
-                                  value: 0,
-                                  label: Text('All'),
-                                  icon: Icon(BoxIcons.bx_square_rounded)),
-                              ButtonSegment(
-                                  value: 1,
-                                  label: Text('Only'),
-                                  icon: Icon(IonIcons.scan_sharp)),
-                            ],
-                            selected: <int>{selected},
-                            onSelectionChanged: (newSelection) {
-                              setState(() {
-                                selected = newSelection.first;
-                              });
-                            },
-                          ),
-                          if (selected == 0)
-                            SizedBox(
-                                width: 100,
-                                child: TextField(
-                                  controller: _allBorderRadius,
-                                  onSubmitted: (value) {
-                                    setState(() {
-                                      borderAllRadius = double.parse(value);
-                                    });
-                                  },
-                                )),
-                          heightBox(),
-                          const Divider(thickness: .5),
-                          heightBox(),
-                          const Text(
-                            "Opacity",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          heightBox(),
-                          Slider(
-                              value: opacityValue,
-                              onChanged: (v) {
-                                setState(() {
-                                  opacityValue = v;
-                                });
-                              }),
-                          heightBox(),
-                          const Divider(thickness: .5),
-                          heightBox(),
-                          Row(
-                            children: [
-                              const Expanded(
-                                child: Text(
-                                  "Border",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                            heightBox(),
+                            GestureDetector(
+                              onTap: _showBackgroundColorDialog,
+                              child: Container(
+                                width: 80,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    border:
+                                        Border.all(color: Colors.grey.shade300),
+                                    color: mainContainerColor,
+                                    borderRadius: BorderRadius.circular(10)),
                               ),
-                              Switch(
-                                  value: borderSwitch,
-                                  onChanged: (v) {
-                                    setState(() {
-                                      borderSwitch = v;
-                                    });
-                                  })
-                            ],
-                          ),
-                          heightBox(),
-                          if (borderSwitch)
-                            Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        "Color",
-                                        style: titleStyle,
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                      onTap: _showBorderColorDialog,
-                                      child: Container(
-                                        width: 80,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.grey.shade300),
-                                            color: mainContainerBorderColor,
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                heightBox(),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        "Size",
-                                        style: titleStyle,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                        width: 100,
-                                        child: TextField(
-                                          controller: _borderSize,
-                                          onSubmitted: (value) {
-                                            setState(() {
-                                              borderSize = double.parse(value);
-                                            });
-                                          },
-                                        ))
-                                  ],
-                                ),
-                                heightBox(),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        "Stroke align",
-                                        style: titleStyle,
-                                      ),
-                                    ),
-                                    DropdownButton<String>(
-                                      dropdownColor: const Color(0xffF8F9FB),
-                                      value: dropdownValue,
-                                      icon: const Icon(Icons.arrow_drop_down),
-                                      iconSize: 24,
-                                      elevation: 16,
-                                      style: const TextStyle(
-                                          color: Colors.black, fontSize: 18),
-                                      underline: Container(height: 0),
-                                      onChanged: (data) {
-                                        setState(() {
-                                          dropdownValue = data!;
-                                          if (data == 'Center') {
-                                            setState(() {
-                                              borderAlign =
-                                                  BorderSide.strokeAlignCenter;
-                                              borderAlignStr =
-                                                  "BorderSide.strokeAlignCenter";
-                                            });
-                                          }
-                                          if (data == 'Inside') {
-                                            setState(() {
-                                              borderAlign =
-                                                  BorderSide.strokeAlignInside;
-                                              borderAlignStr =
-                                                  "BorderSide.strokeAlignInside";
-                                            });
-                                          }
-                                          if (data == 'Outside') {
-                                            setState(() {
-                                              borderAlign =
-                                                  BorderSide.strokeAlignOutside;
-                                              borderAlignStr =
-                                                  "BorderSide.strokeAlignOutside";
-                                            });
-                                          }
-                                        });
-                                      },
-                                      items: spinnerItems
-                                          .map<DropdownMenuItem<String>>(
-                                              (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ],
-                                ),
+                            ),
+                            heightBox(),
+                            const Divider(thickness: .5),
+                            heightBox(),
+                            const Text(
+                              "Radius",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            heightBox(),
+                            SegmentedButton(
+                              segments: const [
+                                ButtonSegment(
+                                    value: 0,
+                                    label: Text('All'),
+                                    icon: Icon(BoxIcons.bx_square_rounded)),
+                                ButtonSegment(
+                                    value: 1,
+                                    label: Text('Only'),
+                                    icon: Icon(IonIcons.scan_sharp)),
                               ],
+                              selected: <int>{selected},
+                              onSelectionChanged: (newSelection) {
+                                setState(() {
+                                  selected = newSelection.first;
+                                });
+                              },
                             ),
-                          heightBox(),
-                          const Divider(thickness: .5),
-                          heightBox(),
-                          Row(
-                            children: [
-                              const Expanded(
-                                child: Text(
-                                  "Shadow",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              Switch(
-                                  value: shadowSwitch,
-                                  onChanged: (v) {
-                                    setState(() {
-                                      shadowSwitch = v;
-                                    });
-                                  })
-                            ],
-                          ),
-                          heightBox(),
-                          if (shadowSwitch)
+                            if (selected == 0)
+                              SizedBox(
+                                  width: 100,
+                                  child: TextField(
+                                    controller: _allBorderRadius,
+                                    onSubmitted: (value) {
+                                      setState(() {
+                                        borderAllRadius = double.parse(value);
+                                      });
+                                    },
+                                  )),
+                            heightBox(),
+                            const Divider(thickness: .5),
+                            heightBox(),
+                            const Text(
+                              "Opacity",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            heightBox(),
+                            Slider(
+                                value: opacityValue,
+                                onChanged: (v) {
+                                  setState(() {
+                                    opacityValue = v;
+                                  });
+                                }),
+                            heightBox(),
+                            const Divider(thickness: .5),
+                            heightBox(),
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   child: Text(
-                                    "Color",
-                                    style: titleStyle,
+                                    "Border",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                GestureDetector(
-                                  onTap: _showShadowColorDialog,
-                                  child: Container(
-                                    width: 80,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.grey.shade300),
-                                        color: mainContainerShadowColor,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                  ),
-                                ),
+                                Switch(
+                                    value: borderSwitch,
+                                    onChanged: (v) {
+                                      setState(() {
+                                        borderSwitch = v;
+                                      });
+                                    })
                               ],
                             ),
-                        ],
+                            heightBox(),
+                            if (borderSwitch)
+                              Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          "Color",
+                                          style: titleStyle,
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: _showBorderColorDialog,
+                                        child: Container(
+                                          width: 80,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.grey.shade300),
+                                              color: mainContainerBorderColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  heightBox(),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          "Size",
+                                          style: titleStyle,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                          width: 100,
+                                          child: TextField(
+                                            controller: _borderSize,
+                                            onSubmitted: (value) {
+                                              setState(() {
+                                                borderSize = double.parse(value);
+                                              });
+                                            },
+                                          ))
+                                    ],
+                                  ),
+                                  heightBox(),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          "Stroke align",
+                                          style: titleStyle,
+                                        ),
+                                      ),
+                                      DropdownButton<String>(
+                                        dropdownColor: const Color(0xffF8F9FB),
+                                        value: dropdownValue,
+                                        icon: const Icon(Icons.arrow_drop_down),
+                                        iconSize: 24,
+                                        elevation: 16,
+                                        style: const TextStyle(
+                                            color: Colors.black, fontSize: 18),
+                                        underline: Container(height: 0),
+                                        onChanged: (data) {
+                                          setState(() {
+                                            dropdownValue = data!;
+                                            if (data == 'Center') {
+                                              setState(() {
+                                                borderAlign =
+                                                    BorderSide.strokeAlignCenter;
+                                                borderAlignStr =
+                                                    "BorderSide.strokeAlignCenter";
+                                              });
+                                            }
+                                            if (data == 'Inside') {
+                                              setState(() {
+                                                borderAlign =
+                                                    BorderSide.strokeAlignInside;
+                                                borderAlignStr =
+                                                    "BorderSide.strokeAlignInside";
+                                              });
+                                            }
+                                            if (data == 'Outside') {
+                                              setState(() {
+                                                borderAlign =
+                                                    BorderSide.strokeAlignOutside;
+                                                borderAlignStr =
+                                                    "BorderSide.strokeAlignOutside";
+                                              });
+                                            }
+                                          });
+                                        },
+                                        items: spinnerItems
+                                            .map<DropdownMenuItem<String>>(
+                                                (String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            heightBox(),
+                            const Divider(thickness: .5),
+                            heightBox(),
+                            Row(
+                              children: [
+                                const Expanded(
+                                  child: Text(
+                                    "Shadow",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Switch(
+                                    value: shadowSwitch,
+                                    onChanged: (v) {
+                                      setState(() {
+                                        shadowSwitch = v;
+                                      });
+                                    })
+                              ],
+                            ),
+                            heightBox(),
+                            if (shadowSwitch)
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      "Color",
+                                      style: titleStyle,
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: _showShadowColorDialog,
+                                    child: Container(
+                                      width: 80,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey.shade300),
+                                          color: mainContainerShadowColor,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

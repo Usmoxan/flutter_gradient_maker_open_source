@@ -2,8 +2,9 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gradient_maker/screens/gradient_generator/pages/home_page.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+import 'home/main_home.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -19,8 +20,8 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const HomePage()));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const HomeMainScreen()));
     });
     super.initState();
   }

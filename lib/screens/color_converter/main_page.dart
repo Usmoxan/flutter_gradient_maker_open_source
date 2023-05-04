@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:meta_seo/meta_seo.dart';
 import 'color_details_card.dart';
 
-class HEXtoRGBA extends StatefulWidget {
-  const HEXtoRGBA({super.key});
+class ColorConverter extends StatefulWidget {
+  const ColorConverter({super.key});
 
   @override
-  _HEXtoRGBAState createState() => _HEXtoRGBAState();
+  _ColorConverterState createState() => _ColorConverterState();
 }
 
 enum ColorMode {
@@ -19,7 +19,7 @@ enum ColorMode {
   hex,
 }
 
-class _HEXtoRGBAState extends State<HEXtoRGBA> {
+class _ColorConverterState extends State<ColorConverter> {
   double mediaQueryWidth(BuildContext context) =>
       MediaQuery.of(context).size.width;
   Color _color = Colors.white;

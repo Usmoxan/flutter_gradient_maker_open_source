@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gradient_maker/screens/home/main_home.dart';
+import 'package:flutter_gradient_maker/screens/splash_page.dart';
 import 'package:meta_seo/meta_seo.dart';
 import 'package:flutter/foundation.dart';
 
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         // primarySwatch: Colors.blue,
       ),
-      home: const HomeMainScreen(),
+      home: const SplashPage(),
     );
   }
 }

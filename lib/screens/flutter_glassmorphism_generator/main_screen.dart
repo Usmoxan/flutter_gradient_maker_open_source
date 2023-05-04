@@ -40,7 +40,7 @@ class _GlassmorphismGeneratorState extends State<GlassmorphismGenerator> {
   final double maxBlurRadius = 10.0;
   bool hasContent = true;
   bool hasBorder = true;
-  Color mainColor = Colors.blue;
+  Color mainColor = const Color(0xFF2196F3);
   var _colorNotifier;
 
   @override
@@ -131,7 +131,7 @@ class _GlassmorphismGeneratorState extends State<GlassmorphismGenerator> {
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
-                                    color: whiteColor,
+                                    color: Colors.white,
                                     border: Border.all(
                                         color: Colors.grey.shade300)),
                                 child: Column(

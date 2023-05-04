@@ -4,8 +4,10 @@ import 'package:flutter_gradient_maker/screens/gradient_generator/pages/home_pag
 import 'package:badges/badges.dart' as badges;
 
 import '../../utils/strings.dart';
+import '../code_formatter/main_home.dart';
 import '../color_converter/main_page.dart';
 import '../color_shade_generator/shade_generator_main.dart';
+import '../flutter_glassmorphism_generator/main_screen.dart';
 
 class HomeScreenDesktop extends StatefulWidget {
   const HomeScreenDesktop({super.key});
@@ -61,7 +63,7 @@ class _HomeScreenDesktopState extends State<HomeScreenDesktop> {
                       const SizedBox(height: 10),
                       ListItems(
                         title: 'Color Shade Generator',
-                        badge: true,
+                        badge: false,
                         color1: Colors.red,
                         color2: Colors.yellow,
                         text: 'NEW',
@@ -74,13 +76,39 @@ class _HomeScreenDesktopState extends State<HomeScreenDesktop> {
                       const SizedBox(height: 10),
                       ListItems(
                         title: 'Color Converter',
-                        badge: true,
+                        badge: false,
                         color1: Colors.red,
                         color2: Colors.yellow,
                         text: 'NEW',
                         onPressed: () {
                           setState(() {
                             _selected = const ColorConverter();
+                          });
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      ListItems(
+                        title: 'Dart Code Formatter',
+                        badge: true,
+                        color1: Colors.red,
+                        color2: Colors.yellow,
+                        text: 'NEW',
+                        onPressed: () {
+                          setState(() {
+                            _selected = const DartCodeFormatter();
+                          });
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      ListItems(
+                        title: 'Glassmorphism Generator',
+                        badge: true,
+                        color1: Colors.red,
+                        color2: Colors.yellow,
+                        text: 'NEW',
+                        onPressed: () {
+                          setState(() {
+                            _selected = const GlassmorphismGenerator();
                           });
                         },
                       ),
@@ -142,7 +170,7 @@ class _HomeScreenDesktopState extends State<HomeScreenDesktop> {
               const SizedBox(height: 10),
               ListItems(
                 title: 'Color Shade Generator',
-                badge: true,
+                badge: false,
                 color1: Colors.red,
                 color2: Colors.yellow,
                 text: 'NEW',
@@ -156,7 +184,7 @@ class _HomeScreenDesktopState extends State<HomeScreenDesktop> {
               const SizedBox(height: 10),
               ListItems(
                 title: 'Color Converter',
-                badge: true,
+                badge: false,
                 color1: Colors.red,
                 color2: Colors.yellow,
                 text: 'NEW',
@@ -165,6 +193,32 @@ class _HomeScreenDesktopState extends State<HomeScreenDesktop> {
                     _selected = const ColorConverter();
                   });
                   Navigator.pop(context); // Close the drawer
+                },
+              ),
+              const SizedBox(height: 10),
+              ListItems(
+                title: 'Dart Code Formatter',
+                badge: true,
+                color1: Colors.red,
+                color2: Colors.yellow,
+                text: 'NEW',
+                onPressed: () {
+                  setState(() {
+                    _selected = const DartCodeFormatter();
+                  });
+                },
+              ),
+              const SizedBox(height: 10),
+              ListItems(
+                title: 'Glassmorphism Generator',
+                badge: true,
+                color1: Colors.red,
+                color2: Colors.yellow,
+                text: 'NEW',
+                onPressed: () {
+                  setState(() {
+                    _selected = const GlassmorphismGenerator();
+                  });
                 },
               ),
               const Center(

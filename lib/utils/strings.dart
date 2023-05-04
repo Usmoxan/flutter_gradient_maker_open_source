@@ -29,3 +29,29 @@ String generateLinearCode(Color color1, Color color2, Alignment begin, end) {
       )
     """;
 }
+
+String generateGlassCode(double blurRadius, double opacity, Color mainColor) {
+  return """
+     ClipRRect(
+                                    child: BackdropFilter(
+                                      filter: ImageFilter.blur(
+                                          sigmaX: $blurRadius,
+                                          sigmaY: $blurRadius),
+                                      child: Container(
+                                        width: 336,
+                                        height: 338,
+                                        padding: const EdgeInsets.all(15),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: $mainColor,
+                                                width: .8),
+                                            color:
+                                                $mainColor.withOpacity($opacity),
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
+                                        
+                                      ),
+                                    ),
+                                  ),
+    """;
+}

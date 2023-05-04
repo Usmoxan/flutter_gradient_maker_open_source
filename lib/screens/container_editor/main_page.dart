@@ -4,6 +4,8 @@ import 'package:flutter_gradient_maker/screens/container_editor/responsive_ui/de
 import 'package:flutter_gradient_maker/screens/container_editor/responsive_ui/mobile.dart';
 import 'package:meta_seo/meta_seo.dart';
 
+import '../../utils/colors.dart';
+
 class ContainerEditor extends StatefulWidget {
   const ContainerEditor({super.key});
 
@@ -27,6 +29,7 @@ class _ContainerEditorState extends State<ContainerEditor> {
               'Flutter, Dart, Flutter Gradient, Gradient Maker Flutter, Web');
     }
     return Scaffold(
+      backgroundColor: whiteColor,
       body: MediaQuery.of(context).size.width > 700
           ? const DesktopPage()
           : const MobilePage(),

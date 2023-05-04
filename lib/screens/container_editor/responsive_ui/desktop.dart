@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:icons_plus/icons_plus.dart';
 
+import '../../../code_dialog.dart';
 import '../../gradient_generator/widgets/color_picker_dialog.dart';
 import '../utils/strings.dart';
 
@@ -105,7 +106,7 @@ class _DesktopPageState extends State<DesktopPage> {
           Expanded(
             flex: 3,
             child: Container(
-                 color: const Color(0xFFF8F9FB),
+              color: const Color(0xFFF8F9FB),
               child: Center(
                 child: Opacity(
                   opacity: opacityValue,
@@ -293,7 +294,8 @@ class _DesktopPageState extends State<DesktopPage> {
                                             controller: _borderSize,
                                             onSubmitted: (value) {
                                               setState(() {
-                                                borderSize = double.parse(value);
+                                                borderSize =
+                                                    double.parse(value);
                                               });
                                             },
                                           ))
@@ -322,24 +324,24 @@ class _DesktopPageState extends State<DesktopPage> {
                                             dropdownValue = data!;
                                             if (data == 'Center') {
                                               setState(() {
-                                                borderAlign =
-                                                    BorderSide.strokeAlignCenter;
+                                                borderAlign = BorderSide
+                                                    .strokeAlignCenter;
                                                 borderAlignStr =
                                                     "BorderSide.strokeAlignCenter";
                                               });
                                             }
                                             if (data == 'Inside') {
                                               setState(() {
-                                                borderAlign =
-                                                    BorderSide.strokeAlignInside;
+                                                borderAlign = BorderSide
+                                                    .strokeAlignInside;
                                                 borderAlignStr =
                                                     "BorderSide.strokeAlignInside";
                                               });
                                             }
                                             if (data == 'Outside') {
                                               setState(() {
-                                                borderAlign =
-                                                    BorderSide.strokeAlignOutside;
+                                                borderAlign = BorderSide
+                                                    .strokeAlignOutside;
                                                 borderAlignStr =
                                                     "BorderSide.strokeAlignOutside";
                                               });
@@ -406,6 +408,23 @@ class _DesktopPageState extends State<DesktopPage> {
                                   ),
                                 ],
                               ),
+                            const Text(
+                              "Code",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            CodeViewerDialog(
+                              code: generateContainerColor(
+                                  opacityValue,
+                                  borderAllRadius,
+                                  borderSize,
+                                  borderSwitch,
+                                  mainContainerColor,
+                                  mainContainerBorderColor,
+                                  borderAlignStr,
+                                  shadowSwitch,
+                                  mainContainerShadowColor),
+                            ),
                           ],
                         ),
                       ),

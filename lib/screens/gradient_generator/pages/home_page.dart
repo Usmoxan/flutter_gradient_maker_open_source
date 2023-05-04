@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_gradient_maker/utils/strings.dart';
 import 'package:meta_seo/meta_seo.dart';
+import '../../../code_dialog.dart';
 import '../widgets/color_picker_button.dart';
 import '../widgets/color_picker_dialog.dart';
 import '../widgets/style_selector_row.dart';
@@ -44,6 +45,12 @@ class _HomePageState extends State<HomePage> {
   var _colorNotifier2;
 
   final Color _selectedColor = const Color(0xFFDEEBFF);
+
+  final String myCode = '''
+    void main() {
+      print('Hello, world!');
+    }
+  ''';
 
   //Colors Grids
   Color gridItem1 = const Color(0xFFDEEBFF);
@@ -260,6 +267,11 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       heightSpaceSize(),
+                      Text("Code", style: widgetsTitle),
+                      CodeViewerDialog(
+                        code: isLinearStyle ? linearCode : radialCode,
+                      ),
+                      heightSpaceSize(),
                       SizedBox(
                         height: 50,
                         width: double.infinity,
@@ -284,9 +296,6 @@ class _HomePageState extends State<HomePage> {
                             child: const Text(copyText)),
                       ),
                       heightSpaceSize(),
-                      const Center(
-                        child: Text(creatorName),
-                      )
                     ],
                   ),
                 ),

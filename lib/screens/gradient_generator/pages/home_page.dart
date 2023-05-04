@@ -6,8 +6,8 @@ import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gradient_maker/screens/gradient_generator/utils/colors.dart';
-import 'package:flutter_gradient_maker/screens/gradient_generator/utils/strings.dart';
+
+import 'package:flutter_gradient_maker/utils/strings.dart';
 import 'package:meta_seo/meta_seo.dart';
 import '../widgets/color_picker_button.dart';
 import '../widgets/color_picker_dialog.dart';
@@ -47,14 +47,14 @@ class _HomePageState extends State<HomePage> {
 
   //Colors Grids
   Color gridItem1 = const Color(0xFFDEEBFF);
-  Color gridItem2 = white;
-  Color gridItem3 = white;
-  Color gridItem4 = white;
-  Color gridItem5 = white;
-  Color gridItem6 = white;
-  Color gridItem7 = white;
-  Color gridItem8 = white;
-  Color gridItem9 = white;
+  Color gridItem2 = Colors.white;
+  Color gridItem3 = Colors.white;
+  Color gridItem4 = Colors.white;
+  Color gridItem5 = Colors.white;
+  Color gridItem6 = Colors.white;
+  Color gridItem7 = Colors.white;
+  Color gridItem8 = Colors.white;
+  Color gridItem9 = Colors.white;
 
   //TextEditingController
   final firstColorEditingController = TextEditingController(text: '0');
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
 
   //INFO: Choice Function
   void funcChoice(int choice, Color selectedColor) {
-    List<Color> gridColors = List.filled(9, white);
+    List<Color> gridColors = List.filled(9, Colors.white);
     List<Alignment> gridAlignments = [
       Alignment.bottomRight,
       Alignment.bottomCenter,

@@ -3,6 +3,7 @@ import 'package:flutter_gradient_maker/screens/container_editor/main_page.dart';
 import 'package:flutter_gradient_maker/screens/gradient_generator/pages/home_page.dart';
 import 'package:badges/badges.dart' as badges;
 
+import '../../utils/strings.dart';
 import '../color_converter/main_page.dart';
 import '../color_shade_generator/shade_generator_main.dart';
 
@@ -83,6 +84,12 @@ class _HomeScreenDesktopState extends State<HomeScreenDesktop> {
                           });
                         },
                       ),
+                      const Center(
+                        child: Text(
+                          creatorName,
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      )
                     ],
                   ),
                 )
@@ -160,6 +167,12 @@ class _HomeScreenDesktopState extends State<HomeScreenDesktop> {
                   Navigator.pop(context); // Close the drawer
                 },
               ),
+              const Center(
+                child: Text(
+                  creatorName,
+                  style: TextStyle(color: Colors.grey),
+                ),
+              )
             ],
           ),
         ),

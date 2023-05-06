@@ -9,6 +9,7 @@ import '../color_converter/main_page.dart';
 import '../color_shade_generator/shade_generator_main.dart';
 import '../flutter_glassmorphism_generator/main_screen.dart';
 import '../json_to_dart/main.dart';
+import '../lorem_generator/lorem_main.dart';
 
 class HomeScreenDesktop extends StatefulWidget {
   const HomeScreenDesktop({super.key});
@@ -110,6 +111,19 @@ class _HomeScreenDesktopState extends State<HomeScreenDesktop> {
                         onPressed: () {
                           setState(() {
                             _selected = const GlassmorphismGenerator();
+                          });
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      ListItems(
+                        title: 'Lorem ipsum generator',
+                        badge: true,
+                        color1: Colors.red,
+                        color2: Colors.yellow,
+                        text: 'NEW',
+                        onPressed: () {
+                          setState(() {
+                            _selected = const LoremIpsumGenerator();
                           });
                         },
                       ),

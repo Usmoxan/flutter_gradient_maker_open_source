@@ -91,7 +91,7 @@ class _HomeScreenDesktopState extends State<HomeScreenDesktop> {
                       const SizedBox(height: 10),
                       ListItems(
                         title: 'Dart Code Formatter',
-                        badge: true,
+                        badge: false,
                         color1: Colors.red,
                         color2: Colors.yellow,
                         text: 'NEW',
@@ -104,7 +104,7 @@ class _HomeScreenDesktopState extends State<HomeScreenDesktop> {
                       const SizedBox(height: 10),
                       ListItems(
                         title: 'Glassmorphism Generator',
-                        badge: true,
+                        badge: false,
                         color1: Colors.red,
                         color2: Colors.yellow,
                         text: 'NEW',
@@ -226,26 +226,56 @@ class _HomeScreenDesktopState extends State<HomeScreenDesktop> {
               const SizedBox(height: 10),
               ListItems(
                 title: 'Dart Code Formatter',
-                badge: true,
+                badge: false,
                 color1: Colors.red,
                 color2: Colors.yellow,
                 text: 'NEW',
                 onPressed: () {
                   setState(() {
                     _selected = const DartCodeFormatter();
+                    Navigator.pop(context);
                   });
                 },
               ),
               const SizedBox(height: 10),
               ListItems(
                 title: 'Glassmorphism Generator',
-                badge: true,
+                badge: false,
                 color1: Colors.red,
                 color2: Colors.yellow,
                 text: 'NEW',
                 onPressed: () {
                   setState(() {
                     _selected = const GlassmorphismGenerator();
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+              const SizedBox(height: 10),
+              ListItems(
+                title: 'Lorem ipsum generator',
+                badge: true,
+                color1: Colors.red,
+                color2: Colors.yellow,
+                text: 'NEW',
+                onPressed: () {
+                  setState(() {
+                    _selected = const LoremIpsumGenerator();
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+              const SizedBox(height: 10),
+              ListItems(
+                title: 'JSON to DART',
+                badge: true,
+                color1: Colors.red,
+                color2: Colors.yellow,
+                text: 'NEW',
+                onPressed: () {
+                  setState(() {
+                    _selected = const MyHomePage(title: 'Json To Dart');
+                    Navigator.pop(context);
                   });
                 },
               ),

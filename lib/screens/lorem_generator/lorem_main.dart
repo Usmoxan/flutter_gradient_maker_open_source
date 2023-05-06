@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gradient_maker/utils/colors.dart';
 import 'package:http/http.dart' as http;
+import 'package:icons_plus/icons_plus.dart';
 
 class LoremIpsumGenerator extends StatefulWidget {
   const LoremIpsumGenerator({super.key});
@@ -50,9 +52,19 @@ class _LoremIpsumGeneratorState extends State<LoremIpsumGenerator> {
     }
   }
 
+  Future<void> _copyToClipboard() async {
+    await Clipboard.setData(ClipboardData(text: _ipsumText));
+
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Copied to clipboard'),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: whiteColor,
       appBar: AppBar(
         title: const Text('Lorem Ipsum Generator'),
       ),
@@ -62,31 +74,47 @@ class _LoremIpsumGeneratorState extends State<LoremIpsumGenerator> {
           children: [
             Row(
               children: [
-                PopupMenuButton(
-                  itemBuilder: (context) => [
-                    const PopupMenuItem(
-                      value: 'Short',
-                      child: Text('Short'),
-                    ),
-                    const PopupMenuItem(
-                      value: 'Medium',
-                      child: Text('Medium'),
-                    ),
-                    const PopupMenuItem(
-                      value: 'Long',
-                      child: Text('Long'),
-                    ),
-                    const PopupMenuItem(
-                      value: 'Very Long',
-                      child: Text('Very Long'),
-                    ),
-                  ],
-                  onSelected: (value) {
-                    setState(() {
-                      _selectedParagraphLength = value;
-                    });
-                  },
-                  child: Text(_selectedParagraphLength),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.grey.shade300),
+                      color: Colors.white),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        IonIcons.chevron_down_circle,
+                        size: 18,
+                      ),
+                      const SizedBox(width: 5),
+                      PopupMenuButton(
+                        itemBuilder: (context) => [
+                          const PopupMenuItem(
+                            value: 'Short',
+                            child: Text('Short'),
+                          ),
+                          const PopupMenuItem(
+                            value: 'Medium',
+                            child: Text('Medium'),
+                          ),
+                          const PopupMenuItem(
+                            value: 'Long',
+                            child: Text('Long'),
+                          ),
+                          const PopupMenuItem(
+                            value: 'Very Long',
+                            child: Text('Very Long'),
+                          ),
+                        ],
+                        onSelected: (value) {
+                          setState(() {
+                            _selectedParagraphLength = value;
+                          });
+                        },
+                        child: Text(_selectedParagraphLength),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -111,38 +139,38 @@ class _LoremIpsumGeneratorState extends State<LoremIpsumGenerator> {
               },
               child: const Text('Generate'),
             ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: _copyToClipboard,
+              child: const Text('Copy'),
+            ),
             const SizedBox(height: 16),
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      TextField(
-                        readOnly: true,
-                        controller: TextEditingController(
-                            text: _ipsumText
-                                .replaceAll('<p>', '')
-                                .replaceAll('</p>', '')),
-                        textAlign: TextAlign.justify,
-                        style: const TextStyle(fontSize: 16),
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.all(8.0),
-                        ),
-                        maxLines: null,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'Letter count: $_letterCount',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ],
+                  child: TextField(
+                    readOnly: true,
+                    controller: TextEditingController(
+                        text: _ipsumText
+                            .replaceAll('<p>', '')
+                            .replaceAll('</p>', '')),
+                    textAlign: TextAlign.justify,
+                    style: const TextStyle(fontSize: 16),
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      contentPadding: EdgeInsets.all(8.0),
+                    ),
+                    maxLines: null,
                   ),
                 ),
               ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Letter count: $_letterCount',
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 16),
             ),
           ],
         ),

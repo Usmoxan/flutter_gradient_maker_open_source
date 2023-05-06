@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gradient_maker/screens/json_to_dart/models/config.dart';
 import 'package:flutter_gradient_maker/screens/splash_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meta_seo/meta_seo.dart';
 import 'package:flutter/foundation.dart';
 
-void main() {
+import 'screens/json_to_dart/main_controller.dart';
+
+Future<void> main() async {
   // It is required to add the following to run the meta_seo package correctly
   // before the running of the Flutter app
+  await Hive.initFlutter();
+  await ConfigSetting().init();
+  Get.put(MainController());
   if (kIsWeb) {
     MetaSEO().config();
   }
@@ -30,7 +40,7 @@ class MyApp extends StatelessWidget {
           keywords:
               'Flutter, Dart, Flutter Gradient, Gradient Maker Flutter, Web');
     }
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Small Tools',
       theme: ThemeData(
@@ -38,6 +48,10 @@ class MyApp extends StatelessWidget {
         // primarySwatch: Colors.blue,
       ),
       home: const SplashPage(),
+      builder: FlutterSmartDialog.init(),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: ConfigSetting().locale.value,
     );
   }
 }

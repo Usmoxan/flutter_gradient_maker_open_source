@@ -23,10 +23,10 @@ class _ContainerEditorState extends State<ContainerEditor> {
       meta.author(author: 'Usmoxan');
       meta.description(
           description:
-              'Gradient maker app for Flutter and Container editor, Color shade Generator, HEX to RGBA converter. The app is not fully finished Flutter little tools for you please use for free.');
+              'Flutter tools, Gradient maker,Flutter Container editor, Flutter Color shade Generator, Flutter HEX to RGBA converter. Flutter  Glassmorphism generator,Flutter  JSON to DART, Flutter  Lorem ipsum genrator The app is not fully finished Flutter little tools for you please use for free.');
       meta.keywords(
           keywords:
-              'Flutter, Dart, Flutter Gradient, Gradient Maker Flutter, Web');
+              'Flutter, Dart, Flutter tools, Gradient Maker Flutter, Web, tools, JSON to DART');
     }
     return Scaffold(
       backgroundColor: whiteColor,

@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gradient_maker/screens/container_editor/main_page.dart';
 import 'package:flutter_gradient_maker/screens/gradient_generator/pages/home_page.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:meta_seo/meta_seo.dart';
 
 import '../../utils/strings.dart';
 import '../code_formatter/main_home.dart';
@@ -22,6 +24,18 @@ class _HomeScreenDesktopState extends State<HomeScreenDesktop> {
   Widget _selected = const HomePage();
   @override
   Widget build(BuildContext context) {
+    if (kIsWeb) {
+      // Define MetaSEO object
+      MetaSEO meta = MetaSEO();
+      // add meta seo data for web app as you want
+      meta.author(author: 'Usmoxan');
+      meta.description(
+          description:
+              'Flutter tools, Gradient maker,Flutter Container editor, Flutter Color shade Generator, Flutter HEX to RGBA converter. Flutter  Glassmorphism generator,Flutter  JSON to DART, Flutter  Lorem ipsum genrator The app is not fully finished Flutter little tools for you please use for free.');
+      meta.keywords(
+          keywords:
+              'Flutter, Dart, Flutter tools, Gradient Maker Flutter, Web, tools, JSON to DART');
+    }
     final media = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: media > 1280 ? null : AppBar(),

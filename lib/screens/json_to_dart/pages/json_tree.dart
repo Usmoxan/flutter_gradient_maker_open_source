@@ -7,6 +7,8 @@ import '../style/color.dart';
 import 'json_tree_item.dart';
 
 class JsonTree extends StatelessWidget {
+  const JsonTree({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(

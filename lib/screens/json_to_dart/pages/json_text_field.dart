@@ -5,8 +5,9 @@ import '../main_controller.dart';
 import '../style/color.dart';
 import '../utils/extension.dart';
 
-
 class JsonTextField extends StatelessWidget {
+  const JsonTextField({super.key});
+
   @override
   Widget build(BuildContext context) {
     final MainController controller = Get.find();

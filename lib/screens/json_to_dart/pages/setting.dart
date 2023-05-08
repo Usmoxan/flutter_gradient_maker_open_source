@@ -14,7 +14,6 @@ import '../widget/button.dart';
 import '../widget/checkBox.dart';
 import '../widget/picker.dart';
 
-
 class SettingWidget extends StatelessWidget {
   const SettingWidget({Key? key}) : super(key: key);
 
@@ -55,9 +54,9 @@ class SettingWidget extends StatelessWidget {
             showModalBottomSheet<void>(
               context: context,
               builder: (BuildContext ctx) {
-                return Container(
+                return const SizedBox(
                   height: double.infinity,
-                  child: const MoreSetting(),
+                  child: MoreSetting(),
                 );
               },
             ).whenComplete(() {});
@@ -260,7 +259,7 @@ class MoreSetting extends StatelessWidget {
               },
             );
           }
-          return Container(
+          return const SizedBox(
             width: 0,
             height: 0,
           );
@@ -308,10 +307,10 @@ class MoreSetting extends StatelessWidget {
         children: <Widget>[
           buttonGroup,
           Align(
+            alignment: Alignment.centerLeft,
             child: StText.small(
               appLocalizations.fileHeader,
             ),
-            alignment: Alignment.centerLeft,
           ),
           Container(
             margin: const EdgeInsets.only(top: 10.0),
@@ -321,6 +320,7 @@ class MoreSetting extends StatelessWidget {
               ),
               color: ColorPlate.lightGray,
             ),
+            height: 200.0,
             child: TextField(
               maxLines: null,
               controller: controller.fileHeaderHelpController,
@@ -334,7 +334,6 @@ class MoreSetting extends StatelessWidget {
                 hintText: appLocalizations.fileHeaderHelp,
               ),
             ),
-            height: 200.0,
           ),
         ],
       ),

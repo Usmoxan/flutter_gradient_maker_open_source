@@ -1,4 +1,3 @@
-
 import '../models/config.dart';
 import '../models/dart_property.dart';
 import 'enums.dart';
@@ -79,7 +78,7 @@ import 'dart:convert';''';
   static String getDartTypeString(DartType dartType, DartProperty item) {
     final bool nullable = ConfigSetting().nullsafety.value && item.nullable;
     final String type = dartType.text;
-    return nullable ? type + '?' : type;
+    return nullable ? '$type?' : type;
   }
 
   static const String factoryStringHeader = '    {0}({';
@@ -125,21 +124,24 @@ import 'dart:convert';''';
     return value.runtimeType == Null;
   }
 
-  static const String tryCatchMethod = """void tryCatch(Function f)
+  static const String tryCatchMethod =
+      """void tryCatch(Function f)
       { try {f?.call();}
       catch (e, stack)
        {
         log('\$e'); \n  log('\$stack');
         }
         }""";
-  static const String tryCatchMethodNullSafety = """void tryCatch(Function? f)
+  static const String tryCatchMethodNullSafety =
+      """void tryCatch(Function? f)
       { try {f?.call();}
       catch (e, stack)
        {
         log('\$e'); \n  log('\$stack');
         }
         }""";
-  static const String asTMethod = '''
+  static const String asTMethod =
+      '''
 T asT<T>(dynamic value) {
   if (value is T) {
     return value;
@@ -148,7 +150,8 @@ T asT<T>(dynamic value) {
 }
  ''';
 
-  static const String asTMethodNullSafety = '''
+  static const String asTMethodNullSafety =
+      '''
 T? asT<T>(dynamic value) {
   if (value is T) {
     return value;
@@ -156,7 +159,8 @@ T? asT<T>(dynamic value) {
   return null;
 }
  ''';
-  static const String asTMethodWithDataProtection = '''
+  static const String asTMethodWithDataProtection =
+      '''
 class FFConvert {
   FFConvert._();
 
@@ -200,7 +204,8 @@ T asT<T>(dynamic value, [T defaultValue]) {
 
  ''';
 
-  static const String asTMethodWithDataProtectionNullSafety = '''
+  static const String asTMethodWithDataProtectionNullSafety =
+      '''
 class FFConvert {
   FFConvert._();
   static T? Function<T extends Object?>(dynamic value) convert =
@@ -253,7 +258,8 @@ T? asT<T extends Object?>(dynamic value, [T? defaultValue]) {
     return asTString;
   }
 
-  static const String copyMethodString = '''
+  static const String copyMethodString =
+      '''
 
     {0} copy() {
     return {0}(

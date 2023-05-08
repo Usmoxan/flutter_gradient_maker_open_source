@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 
-
 import '../main_controller.dart';
 import '../utils/camel_under_score_converter.dart';
 import '../utils/dart_helper.dart';
@@ -104,7 +103,7 @@ class DartObject extends DartProperty {
         objectKeys[item.key] = temp;
       } else {
         final DartObject temp = DartObject(
-          uid: uid + '_' + item.key,
+          uid: '${uid}_${item.key}',
           keyValuePair: MapEntry<String, dynamic>(item.key, item.value.data),
           nullable: item.value.nullable,
           depth: depth + 1,
@@ -395,8 +394,9 @@ class DartObject extends DartProperty {
             }
           }
           setString += ',';
-          if (ConfigSetting().addCopyMethod.value)
+          if (ConfigSetting().addCopyMethod.value) {
             copyProperty = item.getListCopy(className: className);
+          }
         } else {
           setString = DartHelper.setProperty(
               item.name.value, item, this.className.value);
@@ -447,8 +447,9 @@ class DartObject extends DartProperty {
           item.key,
           setName,
         ]));
-        if (ConfigSetting().addCopyMethod.value)
+        if (ConfigSetting().addCopyMethod.value) {
           copySb.writeLine('${item.name}:$copyProperty,');
+        }
       }
 
       if (factorySb1.length == 0) {

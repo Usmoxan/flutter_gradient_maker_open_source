@@ -44,11 +44,11 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Container(
               margin: const EdgeInsets.all(10.0),
               child: Column(
-                children: <Widget>[
+                children: const <Widget>[
                   Expanded(
                     child: JsonTextField(),
                   ),
-                  const SettingWidget(),
+                  SettingWidget(),
                 ],
               ),
             ),
@@ -65,8 +65,8 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Container(
               margin: const EdgeInsets.all(10.0),
               child: Column(
-                children: <Widget>[
-                  const JsonTreeHeader(),
+                children: const <Widget>[
+                  JsonTreeHeader(),
                   Expanded(
                     child: JsonTree(),
                   )

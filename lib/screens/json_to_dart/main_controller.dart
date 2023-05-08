@@ -61,7 +61,7 @@ class MainController extends GetxController {
     }
 
     SmartDialog.compatible.showLoading(
-        widget: Center(
+        widget: const Center(
       child: SpinKitRotatingCircle(
         color: Colors.white,
         size: 50.0,
@@ -128,9 +128,8 @@ class MainController extends GetxController {
               element.classError.isNotEmpty ||
               element.propertyError.isNotEmpty);
       if (errorObject != null) {
-        showAlertDialog(errorObject.classError.join('\n') +
-            '\n' +
-            errorObject.propertyError.join('\n'));
+        showAlertDialog(
+            '${errorObject.classError.join('\n')}\n${errorObject.propertyError.join('\n')}');
         return null;
       }
 

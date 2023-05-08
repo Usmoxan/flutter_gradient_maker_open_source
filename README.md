@@ -3,7 +3,7 @@
 An application that generates the best cool gradient colors
 Alternative to fluttergradientgenerator.com
 
-**App Link:** https://usmoxan.github.io/FlutterGradientGeneratorPro/
+**App Link:** https://usmoxan.github.io/FlutterSmallTools/
 
 **Source code:** https://github.com/Usmoxan/flutter_gradient_maker_open_source
 

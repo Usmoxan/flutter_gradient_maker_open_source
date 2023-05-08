@@ -1,4 +1,4 @@
-# Flutter Gradient Generator Pro Open source
+# Flutter Small Tools Open source
 
 An application that generates the best cool gradient colors
 Alternative to fluttergradientgenerator.com
